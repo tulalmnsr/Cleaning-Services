@@ -1,0 +1,87 @@
+*{
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
+}
+h5{
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(to right, #74D194 ,#335268);
+    -webkit-text-fill-color: transparent; 
+    -webkit-background-clip: text;
+}
+h1{
+    color: #054863;
+    font-weight: bold;
+}
+/* Create two equal columns that floats next to each other */
+.column {
+    background-color:white;
+    float: left;
+    width: 50%;
+    padding: 40px;
+    padding-left:60px;
+    height: 700px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+#question{
+    border: .25em solid #EEEEEE;
+    border-width: thin;
+    padding:20px 20px 20px 20px;
+}
+button{
+    background-image: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    border-radius: 50px;
+    border: none;
+}
+  button:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+
+  p {
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #6439a9;
+  }
+  .parent {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  
+  .image1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 1px solid #000000;
+    width:350px;
+    height:350px;
+    border:none;
+    border-radius: 8px;
+  }
+  
+  .image2 {
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    border: 1px solid #000000;
+    width:350px;
+    height:350px;
+    border:none;
+    border-radius: 8px;
+  }
+
+ 
