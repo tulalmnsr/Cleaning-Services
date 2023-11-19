@@ -10,16 +10,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet" href="../CSS/navbar.css">
-        <title>Document</title>
-    </head>
-    <body>
+
         <nav class="navbar-one flex">
             <div class="left flex">
                 <div class="email">
@@ -81,7 +72,7 @@
     
             </ul>
         </nav>
-
+<br><br><br>
 <!-- Slider Section -->
 <div class="slider-container">
   <!-- Slider Content above the three images -->
@@ -91,13 +82,13 @@
   </div>
   <div class="slider">
       <div class="slide">
-          <img src="pictures/slider-image-1.png" alt="Slider Image 1">
+          <img src="slider-image-1.png" alt="Slider Image 1">
       </div>
       <div class="slide">
-          <img src="pictures/slider-image-2.png" alt="Slider Image 2">
+          <img src="slider-image-2.png" alt="Slider Image 2">
       </div>
       <div class="slide">
-          <img src="pictures/slider-image-3.png" alt="Slider Image 3">
+          <img src="slider-image-3.png" alt="Slider Image 3">
       </div>
   </div>
 
@@ -295,76 +286,76 @@
     </div><br>
     <div class="cards-list">
   
-        <div class="card 1">
+        <div class="card card-1">
           <div class="card_image"> <img src="pictures/before1.png" /> </div>
           <div class="card_title title-white">
             <p>Before</p>
           </div>
         </div>
         
-          <div class="card 2">
+          <div class="card card-2">
           <div class="card_image">
-            <img src="pictures/after1.png" />
+            <img src="after1.png" />
             </div>
           <div class="card_title title-white">
             <p>After</p>
           </div>
         </div>
-        <div class="card 1">
-            <div class="card_image"> <img src="pictures/before2.png" /> </div>
+        <div class="card card-1">
+            <div class="card_image"> <img src="before2.png" /> </div>
             <div class="card_title title-white">
               <p>Before</p>
             </div>
           </div>
           
-            <div class="card 2">
+            <div class="card card-2">
             <div class="card_image">
-              <img src="pictures/after2.png" />
+              <img src="after2.png" />
               </div>
             <div class="card_title title-white">
               <p>After</p>
             </div>
           </div>
-          <div class="card 1">
-            <div class="card_image"> <img src="pictures/before3.png" /> </div>
+          <div class="card card-1">
+            <div class="card_image"> <img src="before3.png" /> </div>
             <div class="card_title title-white">
               <p>Before</p>
             </div>
           </div>
           
-            <div class="card 2">
+            <div class="card card-2">
             <div class="card_image">
-              <img src="pictures/after3.png" />
+              <img src="after3.png" />
               </div>
             <div class="card_title title-white">
               <p>After</p>
             </div>
           </div>
-          <div class="card 1">
-            <div class="card_image"> <img src="pictures/before4.png" /> </div>
+          <div class="card card-1">
+            <div class="card_image"> <img src="before4.png" /> </div>
             <div class="card_title title-white">
               <p>Before</p>
             </div>
           </div>
           
-            <div class="card 2">
+            <div class="card card-2">
             <div class="card_image">
-              <img src="pictures/after4.png" />
+              <img src="after4.png" />
               </div>
             <div class="card_title title-white">
               <p>After</p>
             </div>
           </div>
-          <div class="card 1">
-            <div class="card_image"> <img src="pictures/before5.png" /> </div>
+          <div class="card card-1">
+            <div class="card_image"> <img src="before5.png" /> </div>
             <div class="card_title title-white">
               <p>Before</p>
             </div>
           </div>
           
-            <div class="card 2">
+            <div class="card card-2">
             <div class="card_image">
-              <img src="pictures/after5.png" />
+              <img src="after5.png" />
               </div>
             <div class="card_title title-white">
               <p>After</p>
@@ -387,64 +378,48 @@
       <span>UltraTidy Cleaning Services Gallery Page</span>
     </footer>
     <!-- end of footer -->
-    <script src="gallery.js"></script>
+    <script >document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".slide");
+        const content = document.querySelector(".slider-content");
+        const navIcons = document.querySelectorAll(".nav-icon");
+        let currentSlide = 0;
+    
+        function showSlide(index) {
+            slides.forEach((slide) => (slide.style.display = "none"));
+            slides[index].style.display = "block";
+            updateContent(index);
+        }
+    
+        function updateContent(index) {
+            const contentText = [
+                "Your trusted partner in professional cleaning services.",
+                "Experience unparalleled cleanliness and hygiene with our dedicated team of cleaning experts.",
+                "Elevate your living or working space with our top-notch cleaning services, delivering excellence in every detail.",
+            ];
+    
+            content.querySelector("h2").textContent = "UltraTidy Cleaning Service Company";
+            content.querySelector("p").textContent = contentText[index];
+        }
+    
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+    
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+    
+        navIcons.forEach((icon, index) => {
+            icon.addEventListener("click", () => showSlide(index));
+        });
+    
+        showSlide(currentSlide);
+    
+        // Add auto-advance functionality
+        const autoAdvanceInterval = 5000; // Adjust interval as needed (in milliseconds)
+        setInterval(nextSlide, autoAdvanceInterval);
+    });</script>
 </body>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const menuBtn = document.querySelector('.menu-btn');
-    const links = document.querySelector('.links');
-
-    menuBtn.addEventListener('click', function () {
-        links.classList.toggle('active');
-    });
-
-    // Close the menu when a link is clicked
-    links.addEventListener('click', function () {
-        links.classList.remove('active');
-    });
-});
-document.addEventListener("DOMContentLoaded", function () {
-    const slides = document.querySelectorAll(".slide");
-    const content = document.querySelector(".slider-content");
-    const navIcons = document.querySelectorAll(".nav-icon");
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        slides.forEach((slide) => (slide.style.display = "none"));
-        slides[index].style.display = "block";
-        updateContent(index);
-    }
-
-    function updateContent(index) {
-        const contentText = [
-            "Your trusted partner in professional cleaning services.",
-            "Experience unparalleled cleanliness and hygiene with our dedicated team of cleaning experts.",
-            "Elevate your living or working space with our top-notch cleaning services, delivering excellence in every detail.",
-        ];
-
-        content.querySelector("h2").textContent = "UltraTidy Cleaning Service Company";
-        content.querySelector("p").textContent = contentText[index];
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    }
-
-    navIcons.forEach((icon, index) => {
-        icon.addEventListener("click", () => showSlide(index));
-    });
-
-    showSlide(currentSlide);
-
-    // Add auto-advance functionality
-    const autoAdvanceInterval = 5000; // Adjust interval as needed (in milliseconds)
-    setInterval(nextSlide, autoAdvanceInterval);
-});
-  </script>
 </html>
