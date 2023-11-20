@@ -1,0 +1,33 @@
+body {
+    background-image: url('apply.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 80%;
+    font-family: Quicksand,sans-serif;
+  }
+.applypage{
+    color: #054863;
+    max-width: 460px;
+    display: inline-block;
+    justify-content:space-between;
+    padding: 25px;
+
+}
+  .applypage p:first-child{
+    font-weight: 800;
+    font-size: 2.9em;
+  }
+
+.buttonapplynow{
+ background: linear-gradient(rgba(63, 128, 148, 1), rgba(102, 229, 176, 1));
+ border-radius:25px;
+ font-weight: medium;
+  border: none;
+  color: aliceblue;
+  width: 110px;
+  height: 50px;
+  font-size: 1em;
+  margin-top: 60px;
+  margin-left: 110px;
+  
+  }
