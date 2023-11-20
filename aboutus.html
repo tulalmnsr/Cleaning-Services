@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet" />
+        <link href="aboutus.css" rel="stylesheet" />
+        <title>About Us</title>
+       <style>
+        body{
+          background-color: rgba(94, 129, 92, 0.19);
+        
+        }
+       </style>
+    </head>
+<body>
+<section class="aboutuspage">
+          <div class="content">
+              <h2 style="font-size: 3em">Why hire us?</h2>
+              <p style="font-size: 2.5em">WE ARE <b>UltraTidy</b></p>
+              <p class="cleaning">Cleaning Service</p>
+              <p style="font-size: 1.95em">Best cleaning service in town!</p>
+              <p class="exp">Experience the ultimate cleanliness and comfort in your home with our top-notch cleaning services. We take pride in delivering meticulous cleaning solutions tailored to your needs, ensuring a sparkling, spotless environment. Let us handle the dirty work while you enjoy a pristine and welcoming home.</p>
+            </div>
+            <div class="fact-container">
+              <div class="fact">
+                <span class="fact-number count">1820</span>
+                <span class="fact-label">Clean Houses</span>
+              </div>
+              <div class="fact">
+                <span class="fact-number count">110</span>
+                <span class="fact-label">Active Clients</span>
+              </div>
+              <div class="fact">
+                <span class="fact-number count">55</span>
+                <span class="fact-label">Team Members</span>
+              </div>
+              <div class="fact">
+                <span class="fact-number count">5</span>
+                <span class="fact-label">Years</span>
+              </div>
+            </div>
+                <div>
+                <div>
+                <img src="man-clean.jpg" alt="Man Clean" class="manclean">
+                </div>
+                <div> 
+                <img src="women-clean.jpg" alt="women-clean"class="womenclean">
+                </div>
+                  </div>
+
+                <div>
+                    <div class="five-pointed-star">
+                    </div>
+                     <div class="five-pointed-star1">
+                     </div>
+                     <div class="five-pointed-star2">
+                     </div>
+                     <div class="five-pointed-star3">
+                    </div>
+                    <div class="five-pointed-star4">
+                    </div>
+                    <div class="five-pointed-star5">
+                    </div>
+                </div>
+                <div>
+                    <a href="#learnmore.html"><button type="button" class="buttonlearnmore">Learn More</button>
+                </div>    
+            </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.count').each(function () {
+      $(this).prop('Counter', 0).animate({
+        Counter: $(this).text()
+      }, {
+        duration: 1500,
+        easing: 'swing',
+        step: function (now) {
+          $(this).text(Math.ceil(now));
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
