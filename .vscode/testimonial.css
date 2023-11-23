@@ -43,6 +43,16 @@ h1{
     text-align: center;
     background-color: #CCFDE0;
   }
+  @media (max-width: 1000px) {
+    .column .card{
+        padding: 15px;
+    }
+}
+@media screen and (max-width: 980px) {
+    .column {
+        margin: 0 auto;
+    }
+}
   .container{
     margin:auto;
   background-color:rgb(255, 255, 255);
