@@ -83,3 +83,40 @@ function toggleMenu() {
     const menu = document.querySelector('.navbar-two ul');
     menu.classList.toggle('show');
 }
+function addTestimonial() {
+    // Get form values
+    var name = document.getElementById('testimonial-name').value;
+    var content = document.getElementById('testimonial-content').value;
+    var image = document.getElementById('testimonial-image').files[0];
+
+    // Validate form values
+    if (!name || !content || !image) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Create FormData object to send file and text data
+    var formData = new FormData();
+    formData.append('name', name);
+    formData.append('content', content);
+    formData.append('image', image);
+
+    // Send data to the server
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Testimonial added:', data);
+
+        // Reset form fields
+        document.getElementById('testimonial-name').value = '';
+        document.getElementById('testimonial-content').value = '';
+        document.getElementById('testimonial-image').value = '';
+    })
+    .catch(error => {
+        console.error('Error adding testimonial:', error);
+        alert('Error adding testimonial. Please try again.');
+    });
+}

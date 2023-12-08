@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"/>
+    
+    
+    <link rel="stylesheet" href="path/to/dark-mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-glCJ3IBTtXaWHP-3tW3jWsr3zRjN/6M8R5ZL+HUaL7cWCDaUjNp9ff0b1jJP9MUp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="reviews.css" />
+    <title>UltraTidy Admin</title>
+    <link rel="shortcut icon" type="image/png" href="./img/favicon.ico" />
+  </head>
+  <body>
+   <!-- SIDEBAR -->
+<section id="sidebar">
+  <a href="#" class="brand">
+    <i class="fas fa-broom"></i>
+    <span class="text">UltraTidy Admin </span>
+  </a>
+  <ul class="side-menu top">
+    <li>
+      <a href="dashboard.html">
+        <i class="bx bxs-dashboard"></i>
+        <span class="text">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href="payment.html">
+        <i class="bx bxs-shopping-bag-alt"></i>
+        <span class="text">My Store</span>
+      </a>
+    </li>
+    <li>
+      <a href="analytics.html">
+        <i class="bx bxs-doughnut-chart"></i>
+        <span class="text">Analytics</span>
+      </a>
+    </li>
+    <li>
+      <a href="messages.html">
+        <i class="bx bxs-message-dots"></i>
+        <span class="text">Message</span>
+      </a>
+    </li>
+    <li>
+      <a href="team.html">
+        <i class="bx bxs-group"></i>
+        <span class="text">Team</span>
+      </a>
+    </li>
+    <!-- Pages section with subpages -->
+    <li class="has-submenu" id="pages-menu">
+      <a href="javascript:void(0);">
+        <i class="bx bx-file"></i>
+        <span class="text">Pages</span>
+        <i class="bx bx-chevron-down"></i>
+      </a>
+      <ul class="submenu">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li><a href="clients.html">Clients</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+      </ul>
+    </li>
+  </ul>
+  <ul class="side-menu">
+    <li>
+      <a href="settings.html">
+        <i class="bx bxs-cog"></i>
+        <span class="text">Settings</span>
+      </a>
+    </li>
+    <li>
+      <a href="LogIn.html" class="logout">
+        <i class="bx bxs-log-out-circle"></i>
+        <span class="text">Logout</span>
+      </a>
+    </li>
+  </ul>
+</section>
+<!-- SIDEBAR -->
+
+
+    <!-- CONTENT -->
+    <section id="content">
+      <!-- NAVBAR -->
+      <nav>
+        <i id="sidebarToggle" class="bx bx-menu"></i>
+
+        <a href="services.html" class="nav-link">Categories</a>
+        <form action="#">
+          <div class="form-input">
+            <input type="text" placeholder="Search..."  id="searchInput"/>
+            <button onclick="searchReviews()" class="search-btn">
+              <i class="bx bx-search"></i>
+            </button>
+          </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden />
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="notification">
+          <i class="bx bxs-bell"></i>
+          <span class="num">8</span>
+        </a>
+        <a href="profileInfo.html" class="profile">
+          <img src="profile1.jpg" />
+        </a>
+      </nav>
+      <!-- NAVBAR -->
+      <div class="reviews">
+        <h4 class="reviews__heading">Customer reviews</h4>
+  
+        <div class="reviews__average-ratings">
+          <div class="average-ratings__stars">
+            <div class="stars__single">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 43 45"
+                width="43"
+                height="45"
+              >
+                <defs>
+                  <image
+                    width="32"
+                    height="30"
+                    id="img1"
+                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAMAAAB61OwbAAAAAXNSR0IB2cksfwAAAGxQTFRF9vj/9uGb9vX09fPn989R9eSl9eSm9tJb99Rl9fHc9eex9fTo9evH9Om89dyF9tFa9dp79eax9fHd9tdw9vXz9tdv9eq89e7S9fDd9d6P9e7R9d+Q9vj+989S9tJa9em89fPo9eew9tp699Vm8/jTiwAAACR0Uk5TAP8Z//////////////////////8y/////////wD/////////WF554gAAAMlJREFUeJyFktkWgjAMBVMIWNlaARdUxOX//9HSIocGGvME5w5TLgTAHxEBOzEmPJDijlXEEnlFisgqRgGrGAWcwgkYhRMYRSDfTwLEjBySF6WopMLFKC0ORe28jZf4I3UO7TGcI56MgiHU2R4SJNRleskAMecAUcXnZro/+ZqQJIcrAW70O5cEaCggCEB/2F0ToM8J8KAtCh9o53a/i2yzhBzg2W3WeNmnE7so8Xu8+axKTLH1md3qSYlFbD+L7GuPSFarXrpdgC+z9gvgcfNgTwAAAABJRU5ErkJggg=="
+                  />
+                </defs>
+                <use id="Background" href="#img1" x="6" y="7" />
+              </svg>
+            </div>
+            <div class="stars__single">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 43 45"
+                width="43"
+                height="45"
+              >
+                <defs>
+                  <image
+                    width="32"
+                    height="30"
+                    id="img1"
+                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAMAAAB61OwbAAAAAXNSR0IB2cksfwAAAGxQTFRF9vj/9uGb9vX09fPn989R9eSl9eSm9tJb99Rl9fHc9eex9fTo9evH9Om89dyF9tFa9dp79eax9fHd9tdw9vXz9tdv9eq89e7S9fDd9d6P9e7R9d+Q9vj+989S9tJa9em89fPo9eew9tp699Vm8/jTiwAAACR0Uk5TAP8Z//////////////////////8y/////////wD/////////WF554gAAAMlJREFUeJyFktkWgjAMBVMIWNlaARdUxOX//9HSIocGGvME5w5TLgTAHxEBOzEmPJDijlXEEnlFisgqRgGrGAWcwgkYhRMYRSDfTwLEjBySF6WopMLFKC0ORe28jZf4I3UO7TGcI56MgiHU2R4SJNRleskAMecAUcXnZro/+ZqQJIcrAW70O5cEaCggCEB/2F0ToM8J8KAtCh9o53a/i2yzhBzg2W3WeNmnE7so8Xu8+axKTLH1md3qSYlFbD+L7GuPSFarXrpdgC+z9gvgcfNgTwAAAABJRU5ErkJggg=="
+                  />
+                </defs>
+                <use id="Background" href="#img1" x="6" y="7" />
+              </svg>
+            </div>
+            <div class="stars__single">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 43 45"
+                width="43"
+                height="45"
+              >
+                <defs>
+                  <image
+                    width="32"
+                    height="30"
+                    id="img1"
+                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAMAAAB61OwbAAAAAXNSR0IB2cksfwAAAGxQTFRF9vj/9uGb9vX09fPn989R9eSl9eSm9tJb99Rl9fHc9eex9fTo9evH9Om89dyF9tFa9dp79eax9fHd9tdw9vXz9tdv9eq89e7S9fDd9d6P9e7R9d+Q9vj+989S9tJa9em89fPo9eew9tp699Vm8/jTiwAAACR0Uk5TAP8Z//////////////////////8y/////////wD/////////WF554gAAAMlJREFUeJyFktkWgjAMBVMIWNlaARdUxOX//9HSIocGGvME5w5TLgTAHxEBOzEmPJDijlXEEnlFisgqRgGrGAWcwgkYhRMYRSDfTwLEjBySF6WopMLFKC0ORe28jZf4I3UO7TGcI56MgiHU2R4SJNRleskAMecAUcXnZro/+ZqQJIcrAW70O5cEaCggCEB/2F0ToM8J8KAtCh9o53a/i2yzhBzg2W3WeNmnE7so8Xu8+axKTLH1md3qSYlFbD+L7GuPSFarXrpdgC+z9gvgcfNgTwAAAABJRU5ErkJggg=="
+                  />
+                </defs>
+                <use id="Background" href="#img1" x="6" y="7" />
+              </svg>
+            </div>
+            <div class="stars__single">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 43 45"
+                width="43"
+                height="45"
+              >
+                <defs>
+                  <image
+                    width="32"
+                    height="30"
+                    id="img1"
+                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAMAAAB61OwbAAAAAXNSR0IB2cksfwAAAGxQTFRF9vj/9uGb9vX09fPn989R9eSl9eSm9tJb99Rl9fHc9eex9fTo9evH9Om89dyF9tFa9dp79eax9fHd9tdw9vXz9tdv9eq89e7S9fDd9d6P9e7R9d+Q9vj+989S9tJa9em89fPo9eew9tp699Vm8/jTiwAAACR0Uk5TAP8Z//////////////////////8y/////////wD/////////WF554gAAAMlJREFUeJyFktkWgjAMBVMIWNlaARdUxOX//9HSIocGGvME5w5TLgTAHxEBOzEmPJDijlXEEnlFisgqRgGrGAWcwgkYhRMYRSDfTwLEjBySF6WopMLFKC0ORe28jZf4I3UO7TGcI56MgiHU2R4SJNRleskAMecAUcXnZro/+ZqQJIcrAW70O5cEaCggCEB/2F0ToM8J8KAtCh9o53a/i2yzhBzg2W3WeNmnE7so8Xu8+axKTLH1md3qSYlFbD+L7GuPSFarXrpdgC+z9gvgcfNgTwAAAABJRU5ErkJggg=="
+                  />
+                </defs>
+                <use id="Background" href="#img1" x="6" y="7" />
+              </svg>
+            </div>
+            <div class="stars__single">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 43 45"
+                width="43"
+                height="45"
+              >
+                <defs>
+                  <image
+                    width="32"
+                    height="30"
+                    id="img1"
+                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAMAAAB61OwbAAAAAXNSR0IB2cksfwAAAGxQTFRF9vj/9uGb9vX09fPn989R9eSl9eSm9tJb99Rl9fHc9eex9fTo9evH9Om89dyF9tFa9dp79eax9fHd9tdw9vXz9tdv9eq89e7S9fDd9d6P9e7R9d+Q9vj+989S9tJa9em89fPo9eew9tp699Vm8/jTiwAAACR0Uk5TAP8Z//////////////////////8y/////////wD/////////WF554gAAAMlJREFUeJyFktkWgjAMBVMIWNlaARdUxOX//9HSIocGGvME5w5TLgTAHxEBOzEmPJDijlXEEnlFisgqRgGrGAWcwgkYhRMYRSDfTwLEjBySF6WopMLFKC0ORe28jZf4I3UO7TGcI56MgiHU2R4SJNRleskAMecAUcXnZro/+ZqQJIcrAW70O5cEaCggCEB/2F0ToM8J8KAtCh9o53a/i2yzhBzg2W3WeNmnE7so8Xu8+axKTLH1md3qSYlFbD+L7GuPSFarXrpdgC+z9gvgcfNgTwAAAABJRU5ErkJggg=="
+                  />
+                </defs>
+                <use id="Background" href="#img1" x="6" y="7" />
+              </svg>
+            </div>
+  
+            <span class="stars__average-rating-score">
+              4.7 out of 5
+            </span>
+          </div>
+          <div class="average-ratings__total-customers">
+            40 customer ratings
+          </div>
+        </div>
+  
+        <div class="reviews__breakdown">
+          <div class="reviews-breakdown__wrapper">
+            <div class="reviews__single-star-average">
+              <div class="single-star-average__amount">5 star</div>
+              <div class="single-star-average__progress-bar">
+                <progress
+                  class="progress-bar__data"
+                  max="100"
+                  value="84"
+                ></progress>
+              </div>
+              <div class="single-star-average__percentage">84%</div>
+            </div>
+  
+            <div class="reviews__single-star-average">
+              <div class="single-star-average__amount">4 star</div>
+              <div class="single-star-average__progress-bar">
+                <progress
+                  class="progress-bar__data"
+                  max="100"
+                  value="9"
+                ></progress>
+              </div>
+              <div class="single-star-average__percentage">9%</div>
+            </div>
+  
+            <div class="reviews__single-star-average">
+              <div class="single-star-average__amount">3 star</div>
+              <div class="single-star-average__progress-bar">
+                <progress
+                  class="progress-bar__data"
+                  max="100"
+                  value="4"
+                ></progress>
+              </div>
+              <div class="single-star-average__percentage">4%</div>
+            </div>
+  
+            <div class="reviews__single-star-average">
+              <div class="single-star-average__amount">2 star</div>
+              <div class="single-star-average__progress-bar">
+                <progress
+                  class="progress-bar__data"
+                  max="100"
+                  value="2"
+                ></progress>
+              </div>
+              <div class="single-star-average__percentage">2%</div>
+            </div>
+  
+            <div class="reviews__single-star-average">
+              <div class="single-star-average__amount">1 star</div>
+              <div class="single-star-average__progress-bar">
+                <progress
+                  class="progress-bar__data"
+                  max="100"
+                  value="1"
+                ></progress>
+              </div>
+              <div class="single-star-average__percentage">1%</div>
+            </div>
+          </div>
+        </div>
+     
+
+      <div class="testimonials">
+        <div class="wrapper">
+            <div class="box">
+              <i class="fas fa-quote-left quote"></i>
+              <p>Lorem aliasry ipsum dolor sits ametans, consectetur adipisicing elitits. Expedita reiciendis itaque placeat thuratu, quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae, alias.</p>
+              <div class="content">
+                <div class="info">
+                  <div class="name">Alex Smith</div>
+                  <div class="job">Designer | Developer</div>
+                   <!-- Icon for navigating to testimonial page -->
+                   <div class="navigate-icon" onclick="navigateToTestimonialPage(this)"> 📄 </div>
+                  <div class="delete-icon" onclick="deleteTestimonial(this)">❌</div>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </div>
+                <div class="image">
+                  <img src="images/profile-1.jpeg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <i class="fas fa-quote-left quote"></i>
+              <p>Lorem aliasry ipsum dolor sits ametans, consectetur adipisicing elitits. Expedita reiciendis itaque placeat thuratu, quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae, alias.</p>
+              <div class="content">
+                <div class="info">
+                  <div class="name">Steven Chris</div>
+                  <div class="job">YouTuber | Blogger</div>
+                   <!-- Icon for navigating to testimonial page -->
+    <div class="navigate-icon" onclick="navigateToTestimonialPage(this)">
+      📄
+    </div>
+                  <div class="delete-icon" onclick="deleteTestimonial(this)">❌</div>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </div>
+                <div class="image">
+                  <img src="images/profile-2.jpeg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <i class="fas fa-quote-left  quote"></i>
+              <p>Lorem aliasry ipsum dolor sits ametans, consectetur adipisicing elitits. Expedita reiciendis itaque placeat thuratu, quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae, alias.</p>
+              <div class="content">
+                <div class="info">
+                  <div class="name">Kristina Bellis</div>
+                  <div class="job">Freelancer | Advertiser</div>
+                   <!-- Icon for navigating to testimonial page -->
+    <div class="navigate-icon" onclick="navigateToTestimonialPage(this)">
+      📄
+    </div>
+                  <div class="delete-icon" onclick="deleteTestimonial(this)">❌</div>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </div>
+                <div class="image">
+                  <img src="images/profile-3.jpeg" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonials2">
+          <div class="wrapper">
+            <div class="box">
+              <i class="fas fa-quote-left quote"></i>
+              <p>Lorem aliasry ipsum dolor sits ametans, consectetur adipisicing elitits. Expedita reiciendis itaque placeat thuratu, quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae, alias.</p>
+              <div class="content">
+                <div class="info">
+                  <div class="name">Alex Smith</div>
+                  <div class="job">Designer | Developer</div>
+                   <!-- Icon for navigating to testimonial page -->
+    <div class="navigate-icon" onclick="navigateToTestimonialPage(this)">
+      📄
+    </div>
+                  <div class="delete-icon" onclick="deleteTestimonial(this)">❌</div>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </div>
+                <div class="image">
+                  <img src="images/profile-1.jpeg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <i class="fas fa-quote-left quote"></i>
+              <p>Lorem aliasry ipsum dolor sits ametans, consectetur adipisicing elitits. Expedita reiciendis itaque placeat thuratu, quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae, alias.</p>
+              <div class="content">
+                <div class="info">
+                  <div class="name">Steven Chris</div>
+                  <div class="job">YouTuber | Blogger</div>
+                   <!-- Icon for navigating to testimonial page -->
+    <div class="navigate-icon" onclick="navigateToTestimonialPage(this)">
+      📄
+    </div>
+                  <div class="delete-icon" onclick="deleteTestimonial(this)">❌</div>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </div>
+                <div class="image">
+                  <img src="images/profile-2.jpeg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <i class="fas fa-quote-left  quote"></i>
+              <p>Lorem aliasry ipsum dolor sits ametans, consectetur adipisicing elitits. Expedita reiciendis itaque placeat thuratu, quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae, alias.</p>
+              <div class="content">
+                <div class="info">
+                  <div class="name">Kristina Bellis</div>
+                  <div class="job">Freelancer | Advertiser</div>
+                   <!-- Icon for navigating to testimonial page -->
+    <div class="navigate-icon" onclick="navigateToTestimonialPage(this)">
+      📄
+    </div>
+                  <div class="delete-icon" onclick="deleteTestimonial(this)">❌</div>
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                </div>
+                <div class="image">
+                  <img src="images/profile-3.jpeg" alt="">
+                </div>
+              </div>
+            </div>
+       <!-- footer -->
+    <div class="footer">
+        <p>Made with Love by <a href="#">Zeina_Batoul_Mariam_Zeina </a> <span id="date"></span></p>
+      </div>
+      <!-- End of footer -->
+      <script>
+        // Call the displayReviewsTable function to show existing reviews in the table on page load
+        displayReviewsTable();
+      </script>
+      <script src="reviews.js"></script>
+    </body>
+  </html>
