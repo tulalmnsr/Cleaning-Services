@@ -1,296 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"/>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="appointment-admin.css" />
 
-    <!-------------boxi-CSS------------->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!------------CSS---------------->
-    <link href="appointment.css" rel="stylesheet" >
-    <title>Document</title>
-</head>
-<body>
-    <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="logo.jpeg" alt="logo">
-                </span>
-                <div class="text header-text">
-                    <span class="name">UltraTidy</span>
-                    <span class="profession">Cleaning Services</span>
+    <title>UltraTidy Admin</title>
+    <link rel="shortcut icon" type="image/png" href="./img/favicon.ico" />
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+      <a href="#" class="brand">
+        <i class="fas fa-broom"></i>
+        <span class="text">UltraTidy Admin </span>
+      </a>
+      <ul class="side-menu top">
+        <li class="active">
+          <a href="dashboard.html">
+            <i class="bx bxs-dashboard"></i>
+            <span class="text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment.html">
+            <i class="bx bxs-shopping-bag-alt"></i>
+            <span class="text">My Store</span>
+          </a>
+        </li>
+        <li>
+          <a href="analytic.html">
+            <i class="bx bxs-doughnut-chart"></i>
+            <span class="text">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="messages.html">
+            <i class="bx bxs-message-dots"></i>
+            <span class="text">Message</span>
+          </a>
+        </li>
+        <li>
+          <a href="team.html">
+            <i class="bx bxs-group"></i>
+            <span class="text">Team</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a href="settings.html">
+            <i class="bx bxs-cog"></i>
+            <span class="text">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="LogIn.html" class="logout">
+            <i class="bx bxs-log-out-circle"></i>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content">
+      <!-- NAVBAR -->
+      <nav>
+        <i class="bx bx-menu"></i>
+        <a href="services.html" class="nav-link">Categories</a>
+        <form action="#">
+          <div class="form-input">
+            <input type="search" placeholder="Search..." />
+            <button type="submit" class="search-btn">
+              <i class="bx bx-search"></i>
+            </button>
+          </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden />
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="notification">
+          <i class="bx bxs-bell"></i>
+          <span class="num">8</span>
+        </a>
+        <a href="profileInfo.html" class="profile">
+          <img src="profile1.jpg" />
+        </a>
+      </nav>
+      <!-- NAVBAR -->
+
+      <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="#">Dashboard</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i></li>
+              <li>
+                <a class="active" href="appointment-admin.html">Appointments</a>
+              </li>
+            </ul>
+          </div>
+          <a href="#" class="btn-download">
+            <i class="bx bxs-cloud-download"></i>
+            <span class="text">Download PDF</span>
+          </a>
+        </div>
+        <div class="w3-container" id="data-container">
+            <div class="table-data">
+            <div class="order">
+                <div class="head">
+                <h3>Recent Appointments</h3>
+                <i class="bx bx-search"></i>
+                <i class="bx bx-filter"></i>
                 </div>
-            </div>
-
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-
-        <div class="menu-bar">
-            <div class="menu">
-                <li class="search-box">
+                <table id="table">
+                <thead>
+                    <tr>
+                    <th>Client Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Service Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>
+                        <img src="profile2.jpg" />
+                        <p>John Peters</p>
+                    </td>
+                    <td>15-11-2023</td>
+                    <td>11:00 AM</td>
+                    <td>Nabatieh-Alfawqa</td>
+                    <td>xxxxxxxx</td>
+                    <td>
+                      Carpet cleaning
+                  </td>
+                    <td><span class="status completed">Completed</span></td>
+                    <td>
+                      <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                        <button class="btn-delete">Delete</button>
+                    </td>
                     
-                    <i class='bx bx-search-alt icon' ></i>
-                        <input type="text" placeholder="Search...">
-                   
-                </li>
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-heart icon' ></i>
-                            <span class="text nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-hard-hat icon'></i>
-                            <span class="text nav-text">Services</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-photo-album icon' ></i>
-                            <span class="text nav-text">Gallery</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-conversation icon' ></i>
-                            <span class="text nav-text">FAQs</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-comment-edit icon'></i>
-                            <span class="text nav-text">Blog</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bxs-quote-right icon'></i>
-                            <span class="text nav-text">Testimonial</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-table icon'></i>
-                            <span class="text nav-text">Appointments</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bxs-group icon'></i>
-                            <span class="text nav-text">Team Members</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#">
-                        <i class="bx bx-log-out icon"></i>
-                        <span class="text nav-text">Logout</span>
-                    </a>
-                </li>
-                <li class="mode">
-                   <div class="moon-sun">
-                    <i class="bx bx-moon moon icon"></i>
-                    <i class="bx bx-sun sun icon"></i>
-                   </div>
-                   <span class="mode-text text">Dark Mode</span>
-
-                   <div class="toggle-switch">
-                    <span class="switch"></span>
-                   </div>
-                </li>
-            </div>
-
-        </div>
-    </nav>
-    <section class="home">
-        <div class="top">
-            <div class="text">Appointment Management</div>
-            <div class="search has-search">
-                <label for="search form-control-feedback"><i class="fas fa-search"></i></label>
-                <input type="text"  name="search" id="textInput" placeholder="search here" onkeyup="filter()">
-                
-            </div>
-            
-        </div>
-        <div class="card shadow">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col1">
-                        <h6 class="header-list">Appointment List</h6>
-                    </div>
-                    <div class="col2">
-                   
-                    </div>
-                </div>
-            </div>
-            <div class="appointment-table">
-                <table class="atable" border="1" id="atable">
-                    <tr>
-                        <th>Appointment nb.</th>
-                        <th>Customer Name</th>
-                        <th>Service Type</th>
-                        <th>Address</th>
-                        <th>Appointment Date</th>
-                        <th>Appointment Time</th>
-                        <th>Action</th>
-                        <th>Status</th>
-                        <th>View</th>
-                        
                     </tr>
                     <tr>
-                        <td>dfghjkl;</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <td>
+                        <img src="profile3.jpg" />
+                        <p>Jennifer Agile</p>
+                    </td>
+                    <td>15-11-2018</td>
+                    <td>13:00 AM</td>
+                    <td>Nabatieh-Alfawqa</td>
+                    <td>xxxxxxxx</td>
+                    <td>
+                      Carpet cleaning
+                    </td>
+                    <td><span class="status pending">Pending</span></td>
+                    <td>
+                        <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                        <button class="btn-delete">Delete</button>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <img src="profile4.jpg" />
+                        <p>Precious Smith</p>
+                    </td>
+                    <td>15-11-2023</td>
+                    <td>17:00 AM</td>
+                    <td>Nabatieh-Alfawqa</td>
+                    <td>xxxxxxxx</td>
+                    <td>
+                      Carpet cleaning
+                    </td>
+                    <td><span class="status process">Process</span></td>
+                    <td>
+                      <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                        <button class="btn-delete">Delete</button>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <img src="profile2.jpg" />
+                        <p>Zoe Smith</p>
+                    </td>
+                    <td>15-11-2023</td>
+                    <td>11:00 AM</td>
+                    <td>Nabatieh-Alfawqa</td>
+                    <td>xxxxxxxx</td>
+                    <td>
+                      Carpet cleaning
+                    </td>
+                    <td><span class="status pending">Pending</span></td>
+                    <td>
+                      <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                        <button class="btn-delete">Delete</button>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <img src="profile2.jpg" />
+                        <p>Rob Obama</p>
+                    </td>
+                    <td>15-11-2023</td>
+                    <td>11:00 AM</td>
+                    <td>Nabatieh-Alfawqa</td>
+                    <td>xxxxxxxx</td>
+                    <td>
+                      Carpet cleaning
+                    </td>
+                    <td><span class="status completed">Completed</span></td>
+                    <td>
+                        <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                        <button class="btn-delete">Delete</button>
+                    </td>
+                    </tr>
+                    <tr>
+                      <td>
+                          <img src="profile2.jpg" />
+                          <p>Rob Obama</p>
+                      </td>
+                      <td>15-11-2023</td>
+                      <td>11:00 AM</td>
+                      <td>Nabatieh-Alfawqa</td>
+                      <td>xxxxxxxx</td>
+                      <td>
+                        Carpet cleaning
+                      </td>
+                      <td><span class="status completed">Completed</span></td>
+                      <td>
+                          <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                          <button class="btn-delete">Delete</button>
+                      </td>
+                      </tr>
+                      <tr>
                         <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
+                            <img src="profile2.jpg" />
+                            <p>Rob Obama</p>
                         </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>sdfghjkl;'</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>15-11-2023</td>
+                        <td>11:00 AM</td>
+                        <td>Nabatieh-Alfawqa</td>
+                        <td>xxxxxxxx</td>
                         <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
+                          Carpet cleaning
                         </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><span class="status completed">Completed</span></td>
                         <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
+                            <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                            <button class="btn-delete">Delete</button>
                         </td>
-                        <td></td>
-                        <td></td>
-                       
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <i class="far fa-eye" onclick=""></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-edit" onclick="editRow()"></i>
-                            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        
-                    </tr>
+                        </tr>
+                        <tr>
+                          <td>
+                              <img src="profile2.jpg" />
+                              <p>Rob Obama</p>
+                          </td>
+                          <td>15-11-2023</td>
+                          <td>11:00 AM</td>
+                          <td>Nabatieh-Alfawqa</td>
+                          <td>xxxxxxxx</td>
+                          <td>
+                            Carpet cleaning
+                          </td>
+                          <td><span class="status completed">Completed</span></td>
+                          <td>
+                              <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                              <button class="btn-delete">Delete</button>
+                          </td>
+                          </tr>
+                          <tr>
+                            <td>
+                                <img src="profile2.jpg" />
+                                <p>Rob Obama</p>
+                            </td>
+                            <td>15-11-2023</td>
+                            <td>11:00 AM</td>
+                            <td>Nabatieh-Alfawqa</td>
+                            <td>xxxxxxxx</td>
+                            <td>
+                              Carpet cleaning
+                            </td>
+                            <td><span class="status completed">Completed</span></td>
+                            <td>
+                                <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                                <button class="btn-delete">Delete</button>
+                            </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                  <img src="profile2.jpg" />
+                                  <p>Rob Obama</p>
+                              </td>
+                              <td>15-11-2023</td>
+                              <td>11:00 AM</td>
+                              <td>Nabatieh-Alfawqa</td>
+                              <td>xxxxxxxx</td>
+                              <td>
+                                Carpet cleaning
+                              </td>
+                              <td><span class="status completed">Completed</span></td>
+                              <td>
+                                  <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                                  <button class="btn-delete">Delete</button>
+                              </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                    <img src="profile2.jpg" />
+                                    <p>Rob Obama</p>
+                                </td>
+                                <td>15-11-2023</td>
+                                <td>11:00 AM</td>
+                                <td>Nabatieh-Alfawqa</td>
+                                <td>xxxxxxxx</td>
+                                <td>
+                                 Carpet cleaning
+                                </td>
+                                <td><span class="status completed">Completed</span></td>
+                                <td>
+                                    <button class="btn btn-info btn-lg btn-edit" data-toggle="modal" data-target="#myModal">Edit</button>
+                                    <button class="btn-delete">Delete</button>
+                                </td>
+                                </tr>
+                </tbody>
                 </table>
             </div>
+            
+            </div>
+            <div class="pagination" id="pagination"> 
+              <a href="#" id="prev">Previous</a> 
+              <a href="#" class="page-link" data-page="1">1</a> 
+              <a href="#" class="page-link" data-page="2">2</a> 
+              <a href="#" class="page-link" data-page="3">3</a> 
+              <a href="#" id="next">Next</a> 
+              <p id="page-numbers"> </p> 
+            </div> 
         </div>
+      </main>
+      
+      <!-- MAIN -->
     </section>
-    <script src="appointment.js"></script>
-</body>
+    <!-- CONTENT -->
+     <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Appointment</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" id="name">
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address">
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" class="form-control" id="date">
+          </div>
+
+          <div class="form-group">
+            <label for="time">Time:</label>
+            <input type="time" class="form-control" id="time">
+          </div>
+
+          <div class="form-group">
+            <label for="type">Service Type:</label>
+            <div class="custom-select">
+              <select id="services-option" onChange="update()">
+                <option value="">select service</option>
+                <option value="GitHub">GitHub</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Facebook">Facebook</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Twitter">Twitter</option>
+                <option value="Reddit">Reddit</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default btn-update" data-dismiss="modal" onclick="editRow();">Update</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+<div class="space"></div>
+    <!-- footer -->
+    <div class="footer">
+      <p>Made with Love by <a href="#">Zeina_Batoul_Mariam_Zeina </a> <span id="date"></span></p>
+    </div>
+    <!-- End of footer -->
+
+    <script src="appointment-admin.js"></script>
+  </body>
 </html>
