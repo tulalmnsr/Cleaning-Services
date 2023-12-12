@@ -22,10 +22,11 @@ function show() {
   }
   function validate() {
     const email = document.getElementById("email").value;
-     password=document.getElementById("password");
+     const password=document.getElementById("password").value;
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if(email==""){
+    if(email=="" && password==""){
         document.getElementById('email-errormsg').innerHTML="Email field must be filled out";
+        document.getElementById('password-errormsg').innerHTML="Password field must be filled out";
         return false;
     }else{
         if (emailRegex.test(email)) {
