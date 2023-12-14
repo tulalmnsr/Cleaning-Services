@@ -124,3 +124,100 @@ am4core.ready(function () {
       document.body.classList.remove('dark');
     }
   });
+  const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+const sidebar = document.getElementById('sidebar');
+
+allSideMenu.forEach((item) => {
+  const li = item.parentElement;
+
+  item.addEventListener('click', function () {
+    // Close the sidebar if the clicked item is already active
+    if (li.classList.contains('active')) {
+      sidebar.classList.remove('active');
+      li.classList.remove('active');
+    } else {
+      // Close all other active items and open the clicked one
+      allSideMenu.forEach((i) => {
+        i.parentElement.classList.remove('active');
+      });
+      li.classList.add('active');
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const sidebarToggle = document.getElementById('sidebarToggle');
+
+  sidebarToggle.addEventListener('click', function () {
+    sidebar.classList.toggle('active');
+  });
+});
+// TOGGLE SIDEBAR
+const menuBar = document.querySelector('#content nav .bx.bx-menu')
+// ...
+const otherSidebar = document.getElementById('sidebar');
+// ...
+
+
+menuBar.addEventListener('click', function () {
+  sidebar.classList.toggle('hide')
+})
+
+const searchButton = document.querySelector(
+  '#content nav form .form-input button'
+)
+const searchButtonIcon = document.querySelector(
+  '#content nav form .form-input button .bx'
+)
+const searchForm = document.querySelector('#content nav form')
+
+searchButton.addEventListener('click', function (e) {
+  if (window.innerWidth < 576) {
+    e.preventDefault()
+    searchForm.classList.toggle('show')
+    if (searchForm.classList.contains('show')) {
+      searchButtonIcon.classList.replace('bx-search', 'bx-x')
+    } else {
+      searchButtonIcon.classList.replace('bx-x', 'bx-search')
+    }
+  }
+})
+
+if (window.innerWidth < 768) {
+  sidebar.classList.add('hide')
+} else if (window.innerWidth > 576) {
+  searchButtonIcon.classList.replace('bx-x', 'bx-search')
+  searchForm.classList.remove('show')
+}
+
+window.addEventListener('resize', function () {
+  if (this.innerWidth > 576) {
+    searchButtonIcon.classList.replace('bx-x', 'bx-search')
+    searchForm.classList.remove('show')
+  }
+})
+
+function searchPage() {
+  const searchQuery = document.getElementById('searchInput').value;
+  const bodyElement = document.body;
+  
+  // Remove previous highlights
+  const instance = new Mark(bodyElement);
+  instance.unmark();
+
+  // Highlight the search term
+  instance.mark(searchQuery, {
+    separateWordSearch: false,
+    className: 'highlight'
+  });
+
+  // Check if matches are found
+  const matches = document.querySelectorAll('.highlight');
+  if (matches.length > 0) {
+    alert('Search term found!');
+  } else {
+    alert('No matching results found.');
+  }
+
+  return false; // Prevent the form from submitting
+}
