@@ -163,3 +163,42 @@ a:hover {
     display: block;
     margin: 10px;
 }
+.navbar-two ul li:hover ul{ display:block; position: fixed; top:100px;}
+
+.navbar-two ul li ul{
+    background-color: white;
+  position: absolute;
+  display: none;
+  padding: 10px;
+  width:300px;
+  border-radius: 10px;
+  border:1px solid #79fdc6;
+}
+
+.navbar-two li ul li{
+  padding: 0;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  
+}
+
+.navbar-two li ul li #service{
+    height: 40px;
+    line-height: 25px;
+    width: 200px;
+    color:#2c3e50;
+    
+  }
+#service:hover{
+    background-color: #aaf0d3;
+}
+  .service-item:hover{
+    background-color: #aaf0d3;
+  }
+  hr{
+    background-color:#11bafc;
+    margin-left:10px;
+    margin-right: 10px;
+    
+  }

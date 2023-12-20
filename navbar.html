@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="navbar.css">
     <title>Document</title>
+    <script>
+        const button=document.getElementById("dropbtn");
+        const buttonRect=button.getBoundingClientRect();
+        const chevron = document.getElementById("")
+    </script>
 </head>
 <body>
     <nav class="navbar-one flex">
@@ -32,12 +37,22 @@
         </label>
         <ul class="flex">
             <li><a class="item" href="#">HOME</a></li>
-            <li><a class="item" href="#">SERVICES</a></li>
-            <div class="sub-menu">
-                <li><a href="#">SERVICE 1</a></li>
-                <li><a href="#">SERVICE 2</a></li>
-                <li><a href="#">SERVICE 3</a></li>
-            </div>
+            <li><a class="item" href="#">SERVICES</a>
+                <ul class="service-item-list">
+                <li class="service-item"><a href="#" id="service">Carpet Cleaning Service</a></li>
+                <hr>
+                <li class="service-item"><a href="#" id="service">Mattress Cleaning Service</a></li>
+                <hr>
+                <li class="service-item"><a href="#" id="service">Upholestry Cleaning Service</a></li>
+                <hr>
+                <li class="service-item"><a href="#" id="service">Rug Cleaning Service</a></li>
+                <hr>
+                <li class="service-item"><a href="#" id="service">Tiles & Grout Cleaning Service</a></li>
+                <hr>
+                <li class="service-item"><a href="#" id="service">Sofa Cleaning Service</a></li>
+              </ul>
+                </li>
+           
             <li><a class="item" href="#">ABOUT US</a></li>
             <li><a class="item" href="#">BLOG</a></li>
             <li><a class="item" href="#">CONTACT</a></li>
