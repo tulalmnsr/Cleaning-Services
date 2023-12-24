@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="registration.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>Registraion Form</title>
+    
+</head>
+<body>
+       <!-- Navbar -->
+       <!-- Navbar -->
+ <!-- Navbar -->
+<!-- Navbar One -->
+<nav class="navbar-one flex">
+    <div class="left flex">
+        <div class="email">
+            <i class="fa fa-envelope"></i>
+            <span>Working Hours: 08:00 AM - 10:00 PM (MON-SAT)</span>
+        </div>
+    </div>
+    <div class="call">
+        <i class="fa fa-phone-alt"></i>
+        <span>Call Us : ########</span>
+    </div>
+  </nav>
+  
+  <!-- Navbar Two -->
+  <nav class="navbar-two flex">
+    <label class="logo">
+        <h1>UltraTidy</h1>
+    </label>
+    <div class="menu-icon" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="flex"  id="navbar-links">
+        <li><a class="item" href="homePage.html">HOME</a></li>
+        <li><a class="item" href="homePge.html">SERVICES</a>
+            <ul class="service-item-list">
+            <li class="service-item"><a href="carpet.html" id="service">Carpet Cleaning Service</a></li>
+            <hr>
+            <li class="service-item"><a href="mattress.html" id="service">Mattress Cleaning Service</a></li>
+            <hr>
+            <li class="service-item"><a href="upholestry.html" id="service">Upholestry Cleaning Service</a></li>
+            <hr>
+            <li class="service-item"><a href="rug.html" id="service">Rug Cleaning Service</a></li>
+            <hr>
+            <li class="service-item"><a href="tiles.html" id="service">Tiles & Grout Cleaning Service</a></li>
+            <hr>
+            <li class="service-item"><a href="sofa.html" id="service">Sofa Cleaning Service</a></li>
+          </ul>
+            </li>
+        <li><a class="item" href="aboutPage.html">ABOUT US</a></li>
+        <li><a class="item" href="blogPage.html">BLOG</a></li>
+        <li><a class="item" href="contactPage.html">CONTACT</a></li>
+        <li><a href="LogInSignUp.html" class="button">Login</a></li>
+        <li><a href="LogInSignUp.html" class="button">Sign up</a></li>
+    </ul>
+  </nav>
+  <br><br>
+    <div class="container">
+        <h1>Apply Now !</h1>
+        <h2>Join us our team</h2>
+        <form id="form">
+            <!-- Client Information -->
+            <div class="container2">
+                <input id="file-2" type="file" accept="image/*" hidden>
+                <div class="img-area-2 active" data-img="">
+                    <i class='bx bxs-cloud-upload icon'></i>
+                    <h3>Upload Image</h3>
+                </div>
+                <button class="select-image">Select Profile Photo</button>
+            </div>
+
+            <label for="fullName">Full Name: <span>*</span></label>
+            <input type="text" id="fullname" name="fullname" placeholder="your name.." >
+            <b><span id="nameerror" class="error"></span></b><br><br>
+
+            <label for="age">Age: <span>*</span></label>
+            <input type="number" id="age" name="age" placeholder="your age.." >
+            <b><span id="ageerror" class="error"></span></b><br>
+            
+                <div class="radio-list">
+                    <h4>Gender*</h4>
+                    <div class="radio-item"><input name="radio" id="radio1" type="radio"><label for="radio1">Male</label></div>
+                    <div class="radio-item"><input name="radio" id="radio2" type="radio"><label for="radio2">Female</label></div>
+                </div>
+            <br>
+            <b><label id="gndrerror" class="error" style="color:black;"></label></b>
+          <br>
+
+            <label for="address">Address: <span>*</span></label>
+            <input type="text" id="address" name="address"  placeholder="your address.." ></textarea>
+            <b><span id="addresserror" class="error"></span></b><br><br>
+
+            <label for="phonenb">Phone: <span>*</span></label>
+            <input type="tel" id="phonenb" name="phonenb" placeholder="your phone number.." >
+            <b><span id="phoneerror" class="error"></span></b><br><br>
+
+            <label for="email">Email: <span>*</span></label>
+            <input type="email" id="email" name="email" placeholder="your email .." >
+            <b><span id="emailerror" class="error"></span></b><br><br>
+
+            <!-- Service Details -->
+            <label for="servicetype">Service Type: <span>*</span></label>
+            <input type="text" id="servicetype" name="servicetype" placeholder="enter service type.." >
+            <b><span id="serviceerror" class="error"></span></b><br><br>
+           
+            <label for="resume">Upload Resume *</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx"  hidden>
+            <button class="select-resume" id="select-resume">Select Resume</button>
+            <span id="resumeerror">No file chosen, yet.</span>
+            <br><br>
+            <!-- Submit Button -->
+            <button type="submit" onclick="validate()" id="submit">Submit</button>
+        </form>
+    </div>
+         <!-- footer -->
+         <footer>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <span>UltraTidy Cleaning Services Gallery Page</span>
+          </footer>
+          <!-- end of footer -->
+</body>
+<script src="registration.js">
+</script>
+</html>
