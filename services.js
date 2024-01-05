@@ -22,96 +22,8 @@ $(document).ready(function () {
         }
     });
 
-    var table = $('.table').DataTable();
-if (table !== 'undefined' && table !== null) {
-    table.destroy();
-}
-
-
-
- 
-// Define the toggleVisibility function
-window.toggleVisibility = function (element) {
-    var icon = $(element).find('i');
-    if (icon.text() === 'visibility') {
-        icon.text('visibility_off');
-        element.title="Publish";
-        // Add your logic to hide the content or perform any other action
-    } else {
-        icon.text('visibility');
-        element.title="Unpublish";
-        // Add your logic to show the content or perform any other action
-    }
-};
-    // Pagination
-    var table = $("table");
-    var tbody = table.find("tbody");
-    var rowsPerPage = 5;
-    var currentPage = 1;
-
-    // Initialize pagination
-    function initPagination() {
-        var numRows = tbody.find("tr").length;
-        var numPages = Math.ceil(numRows / rowsPerPage);
-
-        // Add pagination links
-        var paginationHtml = '<ul class="pagination">';
-        paginationHtml += '<li class="page-item"><a href="#" class="page-link" onclick="prevPage()">Previous</a></li>';
-        for (var i = 1; i <= numPages; i++) {
-            paginationHtml += '<li class="page-item"><a href="#" class="page-link" onclick="changePage(' + i + ')">' + i + '</a></li>';
-        }
-        paginationHtml += '<li class="page-item"><a href="#" class="page-link" onclick="nextPage()">Next</a></li>';
-        paginationHtml += '</ul>';
-        $(".pagination-container").html(paginationHtml);
-
-        // Show the first page
-        showPage(currentPage);
-    }
-
-    // Show the specified page
-    function showPage(page) {
-        var start = (page - 1) * rowsPerPage;
-        var end = start + rowsPerPage;
-
-        // Hide all rows
-        tbody.find("tr").hide();
-
-        // Show the rows for the current page
-        tbody.find("tr").slice(start, end).show();
-
-        // Update current page
-        currentPage = page;
-
-        // Update active class for pagination links
-        $(".pagination a").removeClass("active");
-        $(".pagination a:contains(" + page + ")").addClass("active");
-    }
-
-    // Change to the specified page
-    window.changePage = function (page) {
-        showPage(page);
-    };
-
-    // Move to the previous page
-    window.prevPage = function () {
-        if (currentPage > 1) {
-            showPage(currentPage - 1);
-        }
-    };
-
-    // Move to the next page
-    window.nextPage = function () {
-        var numRows = tbody.find("tr").length;
-        var numPages = Math.ceil(numRows / rowsPerPage);
-
-        if (currentPage < numPages) {
-            showPage(currentPage + 1);
-        }
-    };
-    
-    // Initialize pagination
-    initPagination();
-    $('table').DataTable({
+    // Initialize DataTable
+    var dataTable = $('table').DataTable({
         "paging": false, // disable pagination since you have a custom one
         "info": false, // disable showing information
         "order": [], // disable initial sorting
@@ -120,22 +32,272 @@ window.toggleVisibility = function (element) {
             "orderable": false
         }]
     });
-    // Add new row and redirect to the last page
-    function addNewRowAndRedirect() {
-        // Add your logic to add a new row here
+    
+    
+    // Pagination logic
+    var table = $("table");
+    var tbody = table.find("tbody");
+    var rowsPerPage = 5;
+    var currentPage = 1;
 
-        // Reinitialize pagination
-        initPagination();
+    function generatePaginationHtml(numPages) {
+        var paginationContainer = $('<ul class="pagination"></ul>');
 
-        // Calculate the new number of pages
+        paginationContainer.append('<li class="page-item"><a href="#" class="page-link" data-page="prev">Previous</a></li>');
+
+        for (var i = 1; i <= numPages; i++) {
+            var pageItem = $('<li class="page-item"></li>');
+            var pageLink = $('<a href="#" class="page-link" data-page="' + i + '">' + i + '</a>');
+            pageItem.append(pageLink);
+            paginationContainer.append(pageItem);
+        }
+
+        paginationContainer.append('<li class="page-item"><a href="#" class="page-link" data-page="next">Next</a></li>');
+
+        return paginationContainer;
+    }
+
+    function initPagination() {
         var numRows = tbody.find("tr").length;
         var numPages = Math.ceil(numRows / rowsPerPage);
 
-        // Redirect to the last page
-        showPage(numPages);
+        var paginationHtml = generatePaginationHtml(numPages);
+        $(".pagination-container").html(paginationHtml);
+
+        showPage(currentPage);
     }
 
-    // Delete button click event
+    function showPage(page) {
+        var start = (page - 1) * rowsPerPage;
+        var end = start + rowsPerPage;
+
+        tbody.find("tr").hide().slice(start, end).show();
+
+        currentPage = page;
+
+        $(".pagination a").removeClass("active");
+        $(".pagination a[data-page='" + page + "']").addClass("active");
+    }
+
+    function changePage(page) {
+        showPage(page);
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            showPage(currentPage - 1);
+        }
+    }
+
+    function nextPage() {
+        var numRows = tbody.find("tr").length;
+        var numPages = Math.ceil(numRows / rowsPerPage);
+
+        if (currentPage < numPages) {
+            showPage(currentPage + 1);
+        }
+    }
+
+    $(".pagination-container").on("click", ".pagination a", function (event) {
+        event.preventDefault();
+
+        var clickedPage = $(this).data("page");
+
+        if (clickedPage === "prev") {
+            prevPage();
+        } else if (clickedPage === "next") {
+            nextPage();
+        } else {
+            changePage(clickedPage);
+        }
+    });
+    initPagination();
+
+    
+    
+    
+    initPagination();
+    window.closeEditModal = function (editServiceId) {
+        $("#editServiceModal").modal("hide");
+        // Redirect to the current page
+        window.location.href = window.location.href;
+    };
+    function closeAddServiceModal() {
+        $("#addServiceModal").modal("hide");
+        location.reload();
+
+    }
+
+    $("#addServiceForm").submit(function (e) {
+        e.preventDefault(); // Prevent the default form submission behavior
+    
+        // Disable the submit button to prevent multiple submissions
+        $("#submitBtn").prop("disabled", true);
+    
+        var serviceName = $("#serviceName").val();
+        var serviceDesc = $("#servicedesc").val();
+        var servicePrice = $("#servicePrice").val();
+        var serviceTest = $("#servicetest").val();
+    
+        closeAddServiceModal();
+        location.reload();
+    
+        $.ajax({
+            type: "POST",
+            url: "servicesadmin.php",
+            data: {
+                submit: true,
+                serviceName: serviceName,
+                servicedesc: serviceDesc,
+                servicePrice: servicePrice,
+                servicetest: serviceTest
+            },
+            success: function (response) {
+                console.log(response);
+        
+                if (response && response.success) {
+                    // Close the modal using Bootstrap's modal method
+                    $('#addServiceModal').modal('hide');
+        
+                    // Scroll to the last page
+                    var table = $('.table').DataTable();
+                    var lastPage = table.page('last').draw('page');
+        
+                    // Reload the page after successful operation
+                    location.reload();
+                } else {
+                    // Enable the submit button in case of failure
+                    $("#submitBtn").prop("disabled", false);
+        
+                    // Handle errors if needed
+                    console.log("Submission failed. Check the server response.");
+                }
+            },
+            error: function (error) {
+                // Enable the submit button in case of failure
+                $("#submitBtn").prop("disabled", false);
+        
+                // Handle errors if needed
+                console.log("Error submitting the form: " + error.responseText);
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "servicesadmin.php",
+            data: {
+                submit: true,
+                serviceName: serviceName,
+                servicedesc: serviceDesc,
+                servicePrice: servicePrice,
+                servicetest: serviceTest
+            },
+            success: function (response) {
+                console.log(response);
+        
+                if (response && response.success) {
+                    // Close the modal using Bootstrap's modal method
+                    $('#addServiceModal').modal('hide');
+        
+                    // Scroll to the last page
+                    var table = $('.table').DataTable();
+                    var lastPage = table.page('last').draw('page');
+        
+                    // Reload the page after successful operation
+                    location.reload();
+                } else {
+                    // Enable the submit button in case of failure
+                    $("#submitBtn").prop("disabled", false);
+        
+                    // Handle errors if needed
+                    console.log("Submission failed. Check the server response:", response);
+                }
+            },
+            error: function (error) {
+                // Enable the submit button in case of failure
+                $("#submitBtn").prop("disabled", false);
+        
+                // Log the error to the console
+                console.log("Error submitting the form:", error);
+        
+                // Handle errors if needed
+                // You can display an alert or other user-friendly error message here
+            }
+        });
+    });s
+   
+
+    window.toggleEditability = function (element) {
+        console.log("toggleEditability called");
+        var row = $(element).closest('tr');
+        var cells = row.find('td.edit');
+    
+        if (!cells.hasClass('editing')) {
+            cells.addClass('editing');
+    
+            var editServiceId = row.find('input[type="checkbox"]').val(); // Use val() instead of attr('value')
+            var editServiceName = cells.eq(0).text();
+            var editServiceDesc = cells.eq(1).text();
+            var editServicePrice = cells.eq(2).text();
+            var editServiceTest = cells.last().text();  // Update this line
+    
+            // Set data-edit-service-id attribute for the Save Changes button
+            $("#editSubmitBtn").attr("data-edit-service-id", editServiceId);
+    
+            $("#editServiceId").val(editServiceId);
+            $("#editServiceName").val(editServiceName);
+            $("#editServiceDesc").val(editServiceDesc);
+            $("#editServicePrice").val(editServicePrice);
+            $("#editServiceTest").val(editServiceTest);
+    
+            $("#editServiceModal").modal("show");
+        }
+    };
+
+   window.saveChanges = function () {
+    var editServiceId = $("#editSubmitBtn").attr("data-edit-service-id");
+
+    var editServiceName = $("#editServiceName").val();
+    var editServiceDesc = $("#editServiceDesc").val();
+    var editServicePrice = $("#editServicePrice").val();
+    var editServiceTest = $("#editServiceTest").val();  // Assuming this is a text field
+    var editServiceComment = $("#editServiceComment").val();  // Add this line
+
+    closeEditModal(editServiceId);
+
+    $.ajax({
+        type: "POST",
+        url: "servicesadmin.php",
+        data: {
+            save: true,
+            editServiceId: editServiceId,
+            editServiceName: editServiceName,
+            editServiceDesc: editServiceDesc,
+            editServicePrice: editServicePrice,
+            editServiceTest: editServiceTest,
+            editServiceComment: editServiceComment  // Add this line
+        },
+        success: function (response) {
+            console.log(response);
+
+            if (response && response.success) {
+                var editedRow = $("table tbody tr").find('input[type="checkbox"][value="' + editServiceId + '"]').closest('tr');
+                editedRow.find('td.edit:eq(0)').text(editServiceName);
+                editedRow.find('td.edit:eq(1)').text(editServiceDesc);
+                editedRow.find('td.edit:eq(2)').text(editServicePrice);
+                editedRow.find('td.edit:eq(3)').text(editServiceTest);
+                editedRow.find('td.edit:eq(4)').text(editServiceComment);  // Add this line
+
+                editedRow.find('td.edit').removeClass('editing');
+
+                // Reload the page after successful save changes
+                location.reload();
+            } else {
+                console.log("Edit failed. Check the server response.");
+            }
+        },
+    });
+};
+
     $(".delete").click(function () {
         var selectedRows = [];
         var checkbox = $('table tbody input[type="checkbox"]');
@@ -145,13 +307,11 @@ window.toggleVisibility = function (element) {
             }
         });
 
-        // Show the delete confirmation modal if at least one row is selected
         if (selectedRows.length > 0) {
             $("#deleteServiceModal").modal("show");
         }
     });
 
-    // Confirm delete function
     window.confirmDelete = function () {
         var selectedRows = [];
         var checkbox = $('table tbody input[type="checkbox"]');
@@ -160,308 +320,45 @@ window.toggleVisibility = function (element) {
                 selectedRows.push($(this).closest('tr'));
             }
         });
-        // Remove selected rows from the table
+    
         selectedRows.forEach(function (row) {
-            row.remove();
+            var serviceId = row.find('input[type="checkbox"]').val();
+            deleteService(serviceId, row);
         });
-        // Reinitialize pagination
-        initPagination();
-
-        // Hide the delete confirmation modal
+    
+        // Note: Remove the initPagination() call from here
+    
         $("#deleteServiceModal").modal("hide");
     };
-// Add this function to your existing JavaScript code
-function toggleEditability(icon) {
-    // Find the closest <tr> element
-    var row = $(icon).closest('tr');
-
-    // Find all <td> elements within the row, excluding the last two columns
-    var cellsToEdit = row.find('td:lt(' + (row.children('td').length - 2) + ')');
-
-    // Toggle the contenteditable attribute for each cell
-    cellsToEdit.each(function () {
-        var isEditable = $(this).attr('contenteditable') === 'true';
-        $(this).attr('contenteditable', !isEditable);
-    });
-}
-
-// Function to toggle visibility of the column
-function toggleVisibility(icon) {
-    var columnIndex = 4; // Index of the column to toggle (zero-based index)
-    var rows = $("table tbody tr");
-
-    rows.each(function () {
-        var cell = $(this).find("td").eq(columnIndex);
-        cell.toggle();
-    });
-
-    // Toggle the icon for visibility on/off
-    var currentIcon = $(icon).find("i");
-    if (currentIcon.text() === "visibility") {
-        currentIcon.text("visibility_off");
-    } else {
-        currentIcon.text("visibility");
-    }
-}
-// Add new service
-$("#addServiceForm").submit(function (e) {
-    e.preventDefault();
-    var serviceName = $("#serviceName").val();
-    var serviceDesc = $("#servicedesc").val();
-    var servicePrice = $("#servicePrice").val();
-    var serviceTest = $("#servicetest").val();
-
-    // Add your logic to add a new row here
-    var newRow = '<tr>' +
-        '<td><span class="custom-checkbox">' +
-        '<input type="checkbox" id="checkboxNew" name="options[]" value="1">' +
-        '<label for="checkboxNew"></label>' +
-        '</span></td>' +
-        '<td contenteditable="false">' + serviceName + '</td>' +
-        '<td contenteditable="false">' + serviceDesc + '</td>' +
-        '<td contenteditable="false">' + servicePrice + '</td>' +
-        '<td contenteditable="false">' +serviceTest + '</td>' +
-        '<td>' +
-        '<a href="#editServiceModal" class="edit" data-toggle="modal" onclick="toggleEditability(this)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>' +
-        '<a href="#" class="view" title="View" onclick="toggleVisibility(this)"><i class="material-icons" data-toggle="tooltip" title="Publish">&#xE8F4;</i></a>' +
-        '</td>' +
-        '</tr>';$(document).ready(function () {
-            // Initialize DataTable only if not already initialized
-            if (!$.fn.dataTable.isDataTable('.table')) {
-                $('.table').DataTable({
-                    "paging": false, // disable default pagination since you have a custom one
-                    "info": false, // disable showing information
-                    "order": [], // disable initial sorting
-                    "columnDefs": [{
-                        "targets": 'no-sort', // columns with class 'no-sort' will not be sortable
-                        "orderable": false
-                    }]
-                });
-            }
-        
-            // Activate tooltip
-            $('[data-toggle="tooltip"]').tooltip();
-        
-            // Select/Deselect checkboxes
-            var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function () {
-                checkbox.prop("checked", this.checked);
-            });
-        
-            checkbox.click(function () {
-                if (!this.checked) {
-                    $("#selectAll").prop("checked", false);
-                }
-            });
-        
-            // Function to toggle contenteditable attribute for cells
-            function toggleEditability(icon) {
-                var row = $(icon).closest('tr');
-                var cellsToEdit = row.find('td:lt(' + (row.children('td').length - 2) + ')');
-                cellsToEdit.prop('contenteditable', function (_, value) {
-                    return value === 'false';
-                });
-            }
-        
-            // Define the toggleVisibility function
-            window.toggleVisibility = function (element) {
-                var icon = $(element).find('i');
-                if (icon.text() === 'visibility') {
-                    icon.text('visibility_off');
+    
+    function deleteService(serviceId, row) {
+        $.ajax({
+            type: "POST",
+            url: "servicesadmin.php",
+            data: {
+                hide: true, // Indicate that it's a request to hide, not delete
+                serviceId: serviceId
+            },
+            success: function (response) {
+                console.log(response);
+    
+                if (response && response.success) {
+                    // Remove the row after successful deletion
+                    row.remove();
+    
+                    // Reload the page after successful operation if needed
+                    // location.reload();
                 } else {
-                    icon.text('visibility');
+                    console.log("Deletion failed. Check the server response:", response);
                 }
-            };
-        
-            // Pagination
-            var table = $('.table').DataTable();
-            var tbody = table.body($('tbody'));
-        
-            var rowsPerPage = 5;
-            var currentPage = 1;
-        
-            // Initialize pagination
-            function initPagination() {
-                var numRows = tbody[0].childNodes.length;
-                var numPages = Math.ceil(numRows / rowsPerPage);
-        
-                // Add pagination links
-                var paginationHtml = '<ul class="pagination">';
-                paginationHtml += '<li class="page-item"><a href="#" class="page-link" onclick="prevPage()">Previous</a></li>';
-                for (var i = 1; i <= numPages; i++) {
-                    paginationHtml += '<li class="page-item"><a href="#" class="page-link" onclick="changePage(' + i + ')">' + i + '</a></li>';
-                }
-                paginationHtml += '<li class="page-item"><a href="#" class="page-link" onclick="nextPage()">Next</a></li>';
-                paginationHtml += '</ul>';
-                $(".pagination-container").html(paginationHtml);
-        
-                // Show the first page
-                showPage(currentPage);
+            },
+            error: function (error) {
+                console.error("Error hiding service:", error);
+    
+                // Handle errors if needed
             }
-        
-            // Show the specified page
-            function showPage(page) {
-                var start = (page - 1) * rowsPerPage;
-                var end = start + rowsPerPage;
-        
-                // Hide all rows
-                tbody.find("tr").hide();
-        
-                // Show the rows for the current page
-                tbody.find("tr").slice(start, end).show();
-        
-                // Update current page
-                currentPage = page;
-        
-                // Update active class for pagination links
-                $(".pagination a").removeClass("active");
-                $(".pagination a:contains(" + page + ")").addClass("active");
-            }
-        
-            // Change to the specified page
-            window.changePage = function (page) {
-                showPage(page);
-            };
-        
-            // Move to the previous page
-            window.prevPage = function () {
-                if (currentPage > 1) {
-                    showPage(currentPage - 1);
-                }
-            };
-        
-            // Move to the next page
-            window.nextPage = function () {
-                var numRows = tbody.find("tr").length;
-                var numPages = Math.ceil(numRows / rowsPerPage);
-        
-                if (currentPage < numPages) {
-                    showPage(currentPage + 1);
-                }
-            };
-        
-            // Initialize pagination
-            initPagination();
-        
-            // Add new row and redirect to the last page
-            function addNewRowAndRedirect() {
-                // Add your logic to add a new row here
-        
-                // Reinitialize pagination
-                initPagination();
-        
-                // Calculate the new number of pages
-                var numRows = tbody.find("tr").length;
-                var numPages = Math.ceil(numRows / rowsPerPage);
-        
-                // Redirect to the last page
-                showPage(numPages);
-            }
-        
-            // Delete button click event
-            $(".delete").click(function () {
-                var selectedRows = [];
-                var checkbox = $('table tbody input[type="checkbox"]');
-                checkbox.each(function () {
-                    if (this.checked) {
-                        selectedRows.push($(this).closest('tr'));
-                    }
-                });
-        
-                // Show the delete confirmation modal if at least one row is selected
-                if (selectedRows.length > 0) {
-                    $("#deleteServiceModal").modal("show");
-                }
-            });
-        
-            // Confirm delete function
-            window.confirmDelete = function () {
-                var selectedRows = [];
-                var checkbox = $('table tbody input[type="checkbox"]');
-                checkbox.each(function () {
-                    if (this.checked) {
-                        selectedRows.push($(this).closest('tr'));
-                    }
-                });
-                // Remove selected rows from the table
-                selectedRows.forEach(function (row) {
-                    table.row(row).remove().draw(false);
-                });
-                // Reinitialize pagination
-                initPagination();
-        
-                // Hide the delete confirmation modal
-                $("#deleteServiceModal").modal("hide");
-            };
-        
-            // Add this function to your existing JavaScript code
-            window.toggleEditability = function (icon) {
-                // Find the closest <tr> element
-                var row = $(icon).closest('tr');
-        
-                // Find all <td> elements within the row, excluding the last two columns
-                var cellsToEdit = row.find('td:lt(' + (row.children('td').length - 2) + ')');
-        
-                // Toggle the contenteditable attribute for each cell
-                cellsToEdit.prop('contenteditable', function (_, value) {
-                    return value === 'false';
-                });
-            };
-        
-            // Function to toggle visibility of the column
-            window.toggleVisibility = function (icon) {
-                var columnIndex = 4; // Index of the column to toggle (zero-based index)
-                var rows = table.rows().nodes();
-        
-                rows.forEach(function (row) {
-                    var cell = $(row).find("td").eq(columnIndex);
-                    cell.toggle();
-                });
-        
-                // Toggle the icon for visibility on/off
-                var currentIcon = $(icon).find("i");
-                if (currentIcon.text() === "visibility") {
-                    currentIcon.text("visibility_off");
-                } else {
-                    currentIcon.text("visibility");
-                }
-            };
-        
-            // Add new service
-            $("#addServiceForm").submit(function (e) {
-                e.preventDefault();
-                var serviceName = $("#serviceName").val();
-                var serviceDesc = $("#servicedesc").val();
-                var servicePrice = $("#servicePrice").val();
-                var serviceTest = $("#servicetest").val();
-        
-                // Add your logic to add a new row here
-                var newRow = [
-                    '<span class="custom-checkbox">',
-                    '<input type="checkbox" id="checkboxNew" name="options[]" value="1">',
-                    '<label for="checkboxNew"></label>',
-                    '</span>',
-                    serviceName,
-                    serviceDesc,
-                    servicePrice,
-                    serviceTest,
-                    '<a href="#editServiceModal" class="edit" data-toggle="modal" onclick="toggleEditability(this)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>' +
-                    '<a href="#" class="view" title="View" onclick="toggleVisibility(this)"><i class="material-icons" data-toggle="tooltip" title="Publish">&#xE8F4;</i></a>'
-                ];
-        
-                // Add the new row to DataTable
-                table.row.add(newRow).draw(false);
-        
-                // Hide the modal
-                $("#addServiceModal").modal("hide");
-            });
         });
-        
-    tbody.append(newRow);
-    initPagination();
-    var numRows = tbody.find("tr").length;
-    var numPages = Math.ceil(numRows / rowsPerPage);
-    showPage(numPages);
-    $("#addServiceModal").modal("hide");
-});
+    }
+    
+
 });
