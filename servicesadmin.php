@@ -99,43 +99,47 @@ if (isset($_POST['save'])) {
 						</div>
 					</div>
 				</div>
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="selectAll">
-									<label for="selectAll"></label>
-							</th>
-							<th>Name</th>
-							<th>Description</th>
-							<th>Price $</th>
-							<th class="no-sort">Comment</th>
-							<th class="no-sort">Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$sql = "SELECT Service_id, Service_name, Description, Price, About_service FROM services_admin";
-						$result = mysqli_query($conn, $sql);
+				<div class="table-container">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>
+									<span class="custom-checkbox resize-handle">
+										<input type="checkbox" id="selectAll">
+										<label for="selectAll"></label>
+									</span>
+								</th>
+								<th class='resize-handle'>Name</th>
+								<th class='resize-handle'>Description</th>
+								<th class='resize-handle'>Price$</th>
+								<th class="no-sort resize-handle">Comment</th>
+								<th class="no-sort resize-handle">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$sql = "SELECT Service_id, Service_name, Description, Price, About_service FROM services_admin";
+							$result = mysqli_query($conn, $sql);
 
-						// Display data in the table
-						while ($row = mysqli_fetch_assoc($result)) {
-							echo "<tr>";
-							echo "<td><span class='custom-checkbox'><input type='checkbox' id='checkbox{$row['Service_id']}' name='options[]' value='{$row['Service_id']}'><label for='checkbox{$row['Service_id']}'></label></span></td>";
-							echo "<td contenteditable='false' class='edit'>{$row['Service_name']}</td>";
-							echo "<td contenteditable='false' class='edit'>{$row['Description']}</td>";
-							echo "<td contenteditable='false' class='edit'>{$row['Price']}</td>";
-							echo "<td contenteditable='false' class='edit comment-column'>" . nl2br($row['About_service']) . "</td>";
-							echo "<td>";
-							echo "<a href='#editServiceModal' class='edit' data-toggle='modal' onclick='toggleEditability(this)'><i class='material-icons' name='edit' data-toggle='tooltip' title='Edit'>&#xE254;</i></a>";
-							echo "</td>";
-							echo "</tr>";
-						}
-						?>
+							// Display data in the table
+							while ($row = mysqli_fetch_assoc($result)) {
+								echo "<tr>";
+								echo "<td class='comment-column service-name'><span class='custom-checkbox'><input type='checkbox' id='checkbox{$row['Service_id']}' name='options[]' value='{$row['Service_id']}'><label for='checkbox{$row['Service_id']}'></label></span></td>";
+								echo "<td class='edit service-name'>{$row['Service_name']}</td>";
+								echo "<td contenteditable='false' class='edit comment-column'>" . nl2br($row['Description']) . "</td>";
+								echo "<td contenteditable='false' class='edit'>{$row['Price']}</td>";
+								echo "<td contenteditable='false' class='edit comment-column'>" . nl2br($row['About_service']) . "</td>";
+								echo "<td>";
+								echo "<a href='#editServiceModal' class='edit' data-toggle='modal' onclick='toggleEditability(this)'><i class='material-icons' name='edit' data-toggle='tooltip' title='Edit'>&#xE254;</i></a>";
+								echo "</td>";
+								echo "</tr>";
+							}
+							?>
 
-					</tbody>
-				</table>
+						</tbody>
+
+					</table>
+				</div>
 				<div class="clearfix">
 					<ul class="pagination">
 						<div class="pagination-container"></div>
@@ -160,7 +164,7 @@ if (isset($_POST['save'])) {
 						</div>
 						<div class="form-group">
 							<label for="servicedesc">Description <span style="color: red;">*</span> </label>
-							<input type="text" class="form-control" id="servicedesc" name="servicedesc" required>
+							<textarea class="form-control" id="servicedesc" name="servicedesc" required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="servicePrice">Price <span style="color: red;">*</span></label>
@@ -172,18 +176,16 @@ if (isset($_POST['save'])) {
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal">
+						<button type="button" class="btn btn-default" data-dismiss="modal"></button>
 						<input type="submit" id="submitBtn" name="submit" class="btn btn-success" onclick="closeAddServiceModal();">
 					</div>
+				</div>
+			</div>
 		</form>
 	</div>
-	</div>
-	</div>
-
 	<!-- Delete Modal HTML -->
 	<div id="deleteServiceModal" class="modal fade">
 		<form method='post' action='servicesadmin.php'>
-
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -196,7 +198,8 @@ if (isset($_POST['save'])) {
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-danger delete" name="delete" onclick="confirmDelete()">Confirm Delete</button>
+						<button type="button" class="btn btn-danger delete" name="delete" onclick="confirmDelete()">Confirm
+							Delete</button>
 					</div>
 				</div>
 			</div>
@@ -219,13 +222,11 @@ if (isset($_POST['save'])) {
 								<label for="editServiceDesc">Description</label>
 								<textarea type="text" class="form-control" id="editServiceDesc" name="editServiceDesc"></textarea>
 							</div>
-
 							<!-- Example additional field (Price) -->
 							<div class="form-group">
 								<label for="editServicePrice">Price $</label>
 								<input type="text" class="form-control" id="editServicePrice" name="editServicePrice">
 							</div>
-
 							<!-- Example additional field (Test) -->
 							<div class="form-group">
 								<label for="editServiceTest">Comment</label>
@@ -235,19 +236,37 @@ if (isset($_POST['save'])) {
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" onclick="closeEditModal()">Close</button>
 							<button type="button" class="btn btn-success" name="save" id="editSubmitBtn" data-edit-service-id="" onclick="saveChanges()">Save Changes</button>
-
-
 						</div>
 					</div>
 				</div>
-
-
 			</div>
 		</form>
 	</div>
-
-
-
 </body>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const tableContainer = document.querySelector('.table-container');
+		const resizeHandle = document.querySelector('.resize-handle');
+		let isResizing = false;
+
+		resizeHandle.addEventListener('mousedown', function(event) {
+			isResizing = true;
+
+			document.addEventListener('mousemove', handleMouseMove);
+			document.addEventListener('mouseup', function() {
+				isResizing = false;
+				document.removeEventListener('mousemove', handleMouseMove);
+			});
+		});
+
+		function handleMouseMove(event) {
+			if (isResizing) {
+				const newWidth = event.clientX - tableContainer.getBoundingClientRect().left;
+				tableContainer.style.width = `${newWidth}px`;
+			}
+		}
+	});
+</script>
+
 
 </html>

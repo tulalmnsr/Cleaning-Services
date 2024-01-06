@@ -129,9 +129,8 @@ $(document).ready(function () {
     }
 
     $("#addServiceForm").submit(function (e) {
-        e.preventDefault(); // Prevent the default form submission behavior
+        e.preventDefault();
     
-        // Disable the submit button to prevent multiple submissions
         $("#submitBtn").prop("disabled", true);
     
         var serviceName = $("#serviceName").val();
@@ -140,7 +139,6 @@ $(document).ready(function () {
         var serviceTest = $("#servicetest").val();
     
         closeAddServiceModal();
-        location.reload();
     
         $.ajax({
             type: "POST",
@@ -154,76 +152,23 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response);
-        
+    
                 if (response && response.success) {
-                    // Close the modal using Bootstrap's modal method
                     $('#addServiceModal').modal('hide');
-        
-                    // Scroll to the last page
                     var table = $('.table').DataTable();
-                    var lastPage = table.page('last').draw('page');
-        
-                    // Reload the page after successful operation
+                    table.page('last').draw('page');
                     location.reload();
                 } else {
-                    // Enable the submit button in case of failure
                     $("#submitBtn").prop("disabled", false);
-        
-                    // Handle errors if needed
-                    console.log("Submission failed. Check the server response.");
-                }
-            },
-            error: function (error) {
-                // Enable the submit button in case of failure
-                $("#submitBtn").prop("disabled", false);
-        
-                // Handle errors if needed
-                console.log("Error submitting the form: " + error.responseText);
-            }
-        });
-        $.ajax({
-            type: "POST",
-            url: "servicesadmin.php",
-            data: {
-                submit: true,
-                serviceName: serviceName,
-                servicedesc: serviceDesc,
-                servicePrice: servicePrice,
-                servicetest: serviceTest
-            },
-            success: function (response) {
-                console.log(response);
-        
-                if (response && response.success) {
-                    // Close the modal using Bootstrap's modal method
-                    $('#addServiceModal').modal('hide');
-        
-                    // Scroll to the last page
-                    var table = $('.table').DataTable();
-                    var lastPage = table.page('last').draw('page');
-        
-                    // Reload the page after successful operation
-                    location.reload();
-                } else {
-                    // Enable the submit button in case of failure
-                    $("#submitBtn").prop("disabled", false);
-        
-                    // Handle errors if needed
                     console.log("Submission failed. Check the server response:", response);
                 }
             },
             error: function (error) {
-                // Enable the submit button in case of failure
                 $("#submitBtn").prop("disabled", false);
-        
-                // Log the error to the console
                 console.log("Error submitting the form:", error);
-        
-                // Handle errors if needed
-                // You can display an alert or other user-friendly error message here
             }
         });
-    });s
+    });
    
 
     window.toggleEditability = function (element) {
@@ -253,51 +198,38 @@ $(document).ready(function () {
         }
     };
 
-   window.saveChanges = function () {
-    var editServiceId = $("#editSubmitBtn").attr("data-edit-service-id");
-
-    var editServiceName = $("#editServiceName").val();
-    var editServiceDesc = $("#editServiceDesc").val();
-    var editServicePrice = $("#editServicePrice").val();
-    var editServiceTest = $("#editServiceTest").val();  // Assuming this is a text field
-    var editServiceComment = $("#editServiceComment").val();  // Add this line
-
-    closeEditModal(editServiceId);
-
-    $.ajax({
-        type: "POST",
-        url: "servicesadmin.php",
-        data: {
-            save: true,
-            editServiceId: editServiceId,
-            editServiceName: editServiceName,
-            editServiceDesc: editServiceDesc,
-            editServicePrice: editServicePrice,
-            editServiceTest: editServiceTest,
-            editServiceComment: editServiceComment  // Add this line
-        },
-        success: function (response) {
-            console.log(response);
-
-            if (response && response.success) {
-                var editedRow = $("table tbody tr").find('input[type="checkbox"][value="' + editServiceId + '"]').closest('tr');
-                editedRow.find('td.edit:eq(0)').text(editServiceName);
-                editedRow.find('td.edit:eq(1)').text(editServiceDesc);
-                editedRow.find('td.edit:eq(2)').text(editServicePrice);
-                editedRow.find('td.edit:eq(3)').text(editServiceTest);
-                editedRow.find('td.edit:eq(4)').text(editServiceComment);  // Add this line
-
-                editedRow.find('td.edit').removeClass('editing');
-
-                // Reload the page after successful save changes
+    window.saveChanges = function () {
+        var editServiceId = $("#editSubmitBtn").data("edit-service-id");
+    
+        var editServiceName = $("#editServiceName").val();
+        var editServiceDesc = $("#editServiceDesc").val();
+        var editServicePrice = $("#editServicePrice").val();
+        var editServiceTest = $("#editServiceTest").val();
+    
+        closeEditModal(); // Close the modal here
+    
+        $.ajax({
+            type: "POST",
+            url: "servicesadmin.php",
+            data: {
+                save: true,
+                editServiceId: editServiceId,
+                editServiceName: editServiceName,
+                editServiceDesc: editServiceDesc,
+                editServicePrice: editServicePrice,
+                editServiceTest: editServiceTest
+            },
+            success: function (response) {
+                // Reload the page after successful save
                 location.reload();
-            } else {
-                console.log("Edit failed. Check the server response.");
+            },
+            error: function (error) {
+                console.log("Error saving changes:", error);
             }
-        },
-    });
-};
-
+        });
+    };
+    
+    
     $(".delete").click(function () {
         var selectedRows = [];
         var checkbox = $('table tbody input[type="checkbox"]');
@@ -326,8 +258,6 @@ $(document).ready(function () {
             deleteService(serviceId, row);
         });
     
-        // Note: Remove the initPagination() call from here
-    
         $("#deleteServiceModal").modal("hide");
     };
     
@@ -347,7 +277,7 @@ $(document).ready(function () {
                     row.remove();
     
                     // Reload the page after successful operation if needed
-                    // location.reload();
+                    location.reload();
                 } else {
                     console.log("Deletion failed. Check the server response:", response);
                 }
