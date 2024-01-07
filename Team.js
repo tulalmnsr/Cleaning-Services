@@ -1,10 +1,13 @@
 $(document).ready(function () {
-    var dataTable = $('#teamTable').DataTable({
+    
+    // Initialize DataTable
+    var tableSettings = {
         "order": [[2, 'desc']], // Default sorting by the third column (Date Created)
         "pageLength": 5, // Maximum 5 rows per page
         "searching": true, // Enable search bar
         "paging": true, // Enable pagination
         "deferRender": true, // Improve performance with large tables
+        "stateSave": true, // Enable state saving
         "columnDefs": [
             {
                 targets: 2, // Index of the Date Created column
@@ -14,7 +17,44 @@ $(document).ready(function () {
                     return moment(date).format('YYYY-MM-DD');
                 }
             }
+
         ]
+        
+        
+    };
+   
+    var dataTable = $('#teamTable').DataTable(tableSettings);
+    
+    // Handle radio button change for status filter
+    $('input[name="status"]').on('change', function () {
+        var status = $(this).val();
+        if (status === 'Expired') {
+            $(this).find('td:eq(4) span').removeClass('badge-warning').addClass('badge-danger');
+        }
+        // Use DataTables API to filter the table
+        if (status === 'all') {
+            dataTable.columns(4).search('').draw();
+        } else {
+            dataTable.columns(4).search(status, true, false).draw();
+        }
+    });
+
+    // Custom filter for exact match
+    $.fn.dataTable.ext.search.push(function (settings, searchData) {
+        var statusFilter = $('input[name="status"]:checked').val();
+
+        if (statusFilter === 'all') {
+            return true;
+        }
+
+        var statusColumn = searchData[4];
+        return statusColumn === statusFilter;
+    });
+
+    // Debugging - Log DataTable search value and data after each draw
+    $('#teamTable').on('search.dt draw.dt', function () {
+        console.log('DataTable search value: ', dataTable.search());
+        console.log('DataTable data: ', dataTable.data().toArray());
     });
 
     // Export button click event
@@ -36,121 +76,119 @@ $(document).ready(function () {
         var fileName = 'team_data_' + getCurrentDate() + '.xlsx';
         XLSX.writeFile(wb, fileName);
     }
-
-
-    // Clear form fields when the modal is shown
-    $('#userName').val('');
-    $('#userRole').val('');
-    $('#userPhoto').val('');
-
-    // Handle form submission
-    $('#addUserForm').submit(function (e) {
-        e.preventDefault();
-
-        // Get form values
-        var name = $('#userName').val();
-        var role = $('#userRole').val();
-
-        // Add a new row to the table (prepend instead of append)
-        var newRow = '<tr data-status="active">' +
-            '<td>' + ($('#teamTableBody tr').length + 1) + '</td>' +
-            '<td><a href="#"><img src="avatar-placeholder.png" class="avatar" alt="Avatar">' + name + '</a></td>' +
-            '<td>' + getCurrentDate() + '</td>' +
-            '<td>' + role + '</td>' +
-            '<td><span class="badge badge-success">Active</span></td>' +
-            '<td><a href="#" class="manage btn-sm">Manage</a></td>' +
-            '</tr>';
-
-        // Prepend the new row to the table
-        $('#teamTableBody').prepend(newRow);
-
-        // Close the modal
-        $('#addUserModal').modal('hide');
-    });
-
     // Handle "Manage" button click
-    $('#teamTableBody').on('click', '.manage', function (e) {
-        e.preventDefault();
+   // Handle "Manage" button click
+   $('#teamTableBody').on('click', '.manage', function (e) {
+    e.preventDefault();
 
-        // Retrieve member details from the row
-        var memberId = $(this).closest('tr').find('td:first').text();
-        var memberName = $(this).closest('tr').find('td:eq(1)').text();
-        var dateCreated = $(this).closest('tr').find('td:eq(2)').text();
-        var role = $(this).closest('tr').find('td:eq(3)').text();
-        var status = $(this).closest('tr').find('td:eq(4)').text();
+    // Retrieve member details from the row
+    var memberId = $(this).closest('tr').find('td:first').text();
+    var memberName = $(this).closest('tr').find('td:eq(1)').text();
+    var dateCreated = $(this).closest('tr').find('td:eq(2)').text();
+    var role = $(this).closest('tr').find('td:eq(3)').text();
+    var status = $(this).closest('tr').find('td:eq(4)').text();
 
-        // Additional: Get the member's photo source
-        var memberPhotoSrc = $(this).closest('tr').find('img').attr('src');
+    // Additional: Get the member's photo source
+    var memberPhotoSrc = $(this).closest('tr').find('img').attr('src');
 
-        // Open a modal with member details
-        $('#manageMemberModal').modal('show');
+    // Check if the application is 30 days old
+    var currentDate = new Date();
+    var applicationDate = new Date(dateCreated);
+    var daysDifference = Math.floor((currentDate - applicationDate) / (1000 * 60 * 60 * 24));
 
-        // Update modal content with member details
-        $('#manageMemberModal #memberId').text(memberId);
-        $('#manageMemberModal #memberName').text(memberName);
-        $('#manageMemberModal #dateCreated').text(dateCreated);
-        $('#manageMemberModal #role').text(role);
-        $('#manageMemberModal #status').text(status);
+    // Open the modal with member details
+    var manageMemberModal = $('#manageMemberModal');
+    manageMemberModal.modal('show');
 
-        // Additional: Update member photo
-        $('#manageMemberModal #memberPhoto').attr('src', memberPhotoSrc);
-    });
+    // Update modal content with member details
+    manageMemberModal.find('#memberId').text(memberId);
+    manageMemberModal.find('#memberName').text(memberName);
+    manageMemberModal.find('#dateCreated').text(dateCreated);
+    manageMemberModal.find('#role').text(role);
+    manageMemberModal.find('#status').text(status);
 
+    // Additional: Update member photo
+    manageMemberModal.find('#memberPhoto').attr('src', memberPhotoSrc);
+
+    // Display a more professional alert for expired applications
+    if (daysDifference >= 30) {
+        updateMemberStatus('Expired');
+        updateMemberInDatabase('Expired');
+    }
+
+    // ... rest of your code
+});
     // Handle "Accept" button click
     $('#acceptApplication').on('click', function () {
-        // Add logic to update member status to "Active" and close the modal
-        // You may want to make an AJAX request to update the status on the server
         updateMemberStatus('Active');
+        updateMemberInDatabase('Active');
         $('#manageMemberModal').modal('hide');
     });
 
     // Handle "Reject" button click
     $('#rejectApplication').on('click', function () {
-        // Add logic to update member status to "Inactive" and close the modal
-        // You may want to make an AJAX request to update the status on the server
         updateMemberStatus('Inactive');
+        updateMemberInDatabase('Inactive');
+        $('#manageMemberModal').modal('hide');
+    });
+    $('#expireApplication').on('click', function () {
+        updateMemberStatus('Expired');
+        updateMemberInDatabase('Expired');
         $('#manageMemberModal').modal('hide');
     });
 
-    // Handle radio button change for status filter
-    $('input[name="status"]').on('change', function () {
-        var status = $(this).val();
-
-        // Show all rows by default
-        $('#teamTable tbody tr').show();
-
-        // If a specific status is selected, hide rows with other statuses
-        if (status !== 'all') {
-            $('#teamTable tbody tr').filter('[data-status!="' + status + '"]').hide();
-        }
-    });
-
-    // Reset filter when modal is closed
-    $('#addUserModal, #manageMemberModal').on('hidden.bs.modal', function () {
-        // Show all rows
-        $('#teamTable tbody tr').show();
-
-        // Reset radio button to show all
-        $('input[name="status"][value="all"]').prop('checked', true);
-    });
-
-    // Function to update member status
+    // Function to update member status in the table
     function updateMemberStatus(status) {
-        // Get the memberId from the modal
         var memberId = $('#manageMemberModal #memberId').text();
-
-        // Update the status in the table
         $('#teamTableBody').find('tr').each(function () {
             var rowMemberId = $(this).find('td:first').text();
             if (rowMemberId === memberId) {
-                // Assuming the status column is the fifth column
-                var badgeColor = (status === 'Active') ? 'success' : 'warning';
-                $(this).find('td:eq(4)').html('<span class="badge badge-' + badgeColor + '">' + status + '</span>');
+                var badgeClass;
+                switch (status) {
+                    case 'Active':
+                        badgeClass = 'badge-success';
+                        break;
+                    case 'Inactive':
+                        badgeClass = 'badge-warning';
+                        break;
+                    case 'Expired':
+                        badgeClass = 'badge-danger';
+                        break;
+                    default:
+                        badgeClass = '';
+                }
+                $(this).find('td:eq(4) span').removeClass().addClass('badge ' + badgeClass).text(status);
+                
+                // Explicitly set the class for 'Expired' status
+                
+                if (status === 'Expired') {
+                    $(this).find('td:eq(4) span').removeClass('badge-warning').addClass('badge-danger');
+                }
                 return false; // Break out of the loop
             }
         });
     }
+    
+    
+    
 
+    // Function to update member status in the database
+    function updateMemberInDatabase(status) {
+        var memberId = $('#manageMemberModal #memberId').text();
+        $.ajax({
+            type: 'POST',
+            url: 'team.php',
+            data: { memberId: memberId, status: status },
+            success: function (response) {
+                console.log('AJAX Success:', response);
+                // Update member status in the table
+                updateMemberStatus(status);
+            },
+            error: function (error) {
+                console.error('AJAX Error:', error);
+            }
+        });
+    }
     // Function to get the current date in 'MM/DD/YYYY' format
     function getCurrentDate() {
         var currentDate = new Date();
@@ -159,4 +197,8 @@ $(document).ready(function () {
         var year = currentDate.getFullYear();
         return year + '-' + month + '-' + day;
     }
+    var initialStatus = $('input[name="status"]:checked').val();
+if (initialStatus !== 'all') {
+    dataTable.columns(4).search(initialStatus, true, false).draw();
+}
 });
