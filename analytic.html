@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"/>
+      <script src="https://cdn.jsdelivr.net/npm/mark.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="path/to/dark-mode.css">
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="analytic.css" />
+    <title>UltraTidy Admin</title>
+    <link rel="shortcut icon" type="image/png" href="./img/favicon.ico" />
+  </head>
+  <body>
+    <section id="sidebar">
+      <a href="#" class="brand">
+        <i class="fas fa-broom"></i>
+        <span class="text">UltraTidy Admin </span>
+      </a>
+      <ul class="side-menu top">
+        <li>
+          <a href="dashboard.html">
+            <i class="bx bxs-dashboard"></i>
+            <span class="text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment.html">
+            <i class="bx bxs-shopping-bag-alt"></i>
+            <span class="text">My Store</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="analytic.html">
+            <i class="bx bxs-doughnut-chart"></i>
+            <span class="text">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="messages.html">
+            <i class="bx bxs-message-dots"></i>
+            <span class="text">Message</span>
+          </a>
+        </li>
+        <li>
+          <a href="team.html">
+            <i class="bx bxs-group"></i>
+            <span class="text">Team</span>
+          </a>
+        </li>
+        <!-- Pages section with subpages -->
+        <li class="has-submenu" id="pages-menu">
+          <a href="javascript:void(0);">
+            <i class="bx bx-file"></i>
+            <span class="text">Pages</span>
+            <i class="bx bx-chevron-down"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="services.html">Services</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="appointment.html">Appointment</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            
+          </ul>
+        </li>
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a href="settings.html">
+            <i class="bx bxs-cog"></i>
+            <span class="text">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="LogIn.html" class="logout">
+            <i class="bx bxs-log-out-circle"></i>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content">
+      <!-- NAVBAR -->
+      <nav>
+        <i class="bx bx-menu"></i>
+        <a href="services.html" class="nav-link">Categories</a>
+        <form onsubmit="return searchPage()">
+          <div class="form-input">
+            <input type="search" id="searchInput" placeholder="Search..." />
+            <button type="submit" class="search-btn">
+              <i class="bx bx-search"></i>
+            </button>
+          </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden />
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="profileInfo.html" class="profile">
+          <img src="profile1.jpg" />
+        </a>
+      </nav>
+      <!-- NAVBAR -->
+<!-- Information Boxes -->
+<div class="info-boxes flex">
+    <div class="info-box">
+      <h3>New Clients</h3>
+      <p id="newClientsCount">120</p>
+    </div>
+    <div class="info-box">
+      <h3>Growth</h3>
+      <p id="growthPercentage">15%</p>
+    </div>
+    <div class="info-box">
+      <h3>Revenue</h3>
+      <p id="revenueAmount">$10,000</p>
+    </div>
+    <div class="info-box">
+      <h3>Appointments</h3>
+      <p id="appointmentsCount">80</p>
+    </div>
+  </div>
+  <!-- End Information Boxes -->
+
+  <div class="chart-container">
+    <!-- Chart -->
+    <div class="canvas-container">
+      <canvas id="cleaningServicesChart" width="400" height="400"></canvas>
+    </div>
+    <!-- End Chart -->
+    <!-- Pie Chart -->
+    <div class="pie-chart-container">
+      <canvas id="servicesPieChart" width="200" height="200"></canvas>
+    </div>
+    <!-- End Pie Chart -->
+  </div>
+  <div class="table-container">
+    <h2>New Clients</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Position</th>
+          <th>Date of Registration</th>
+          <th>Time of Registration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sample data, replace with actual client data -->
+        <tr>
+          <td>John Doe</td>
+          <td>johndoe@example.com</td>
+          <td>30</td>
+          <td>Manager</td>
+          <td>2023-11-24</td>
+          <td>10:00 AM</td>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>johndoe@example.com</td>
+            <td>30</td>
+            <td>Manager</td>
+            <td>2023-11-24</td>
+            <td>10:00 AM</td>
+          </tr>
+          <tr>
+            <td>John Doe</td>
+            <td>johndoe@example.com</td>
+            <td>30</td>
+            <td>Manager</td>
+            <td>2023-11-24</td>
+            <td>10:00 AM</td>
+          </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>janesmith@example.com</td>
+          <td>25</td>
+          <td>Engineer</td>
+          <td>2023-11-24</td>
+          <td>11:30 AM</td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>janesmith@example.com</td>
+            <td>25</td>
+            <td>Engineer</td>
+            <td>2023-11-24</td>
+            <td>11:30 AM</td>
+          </tr>
+          <tr>
+            <td>Jane Smith</td>
+            <td>janesmith@example.com</td>
+            <td>25</td>
+            <td>Engineer</td>
+            <td>2023-11-24</td>
+            <td>11:30 AM</td>
+          </tr>
+          <tr>
+            <td>Jane Smith</td>
+            <td>janesmith@example.com</td>
+            <td>25</td>
+            <td>Engineer</td>
+            <td>2023-11-24</td>
+            <td>11:30 AM</td>
+          </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
+  <!-- End New Clients Table -->
+   <!-- Appointments Comparison Graph -->
+   <div class="appointments-graph-container">
+    <h2>Total Appointments Comparison</h2>
+    <div id="appointmentsGraph" class="amchart"></div>
+  </div>
+  <!-- End Appointments Comparison Graph -->
+
+ <!-- Testimonial Reviews -->
+<div class="testimonial-container">
+    <h2>Testimonial Reviews</h2>
+  
+    <div class="testimonial">
+      <div class="profile-image">
+        <img src="profile1.jpg" alt="John Doe">
+      </div>
+      <div class="review-content">
+        <p class="review-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam."</p>
+        <p class="author">- John Doe</p>
+        <div class="star-rating">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9734;</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="testimonial">
+      <div class="profile-image">
+        <img src="profile2.jpg" alt="Jane Smith">
+      </div>
+      <div class="review-content">
+        <p class="review-text">"Vestibulum justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt."</p>
+        <p class="author">- Jane Smith</p>
+        <div class="star-rating">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9734;</span>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Add more testimonials as needed -->
+  
+    <!-- Average Review -->
+    <div class="average-review">
+      <h3>Average Review:</h3>
+      <div class="star-rating">
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9734;</span>
+      </div>
+      <p>4.5/5</p>
+    </div>
+  
+    <!-- See All Testimonials Link -->
+    <div class="see-all-link">
+      <a href="reviews.html">See All Testimonials</a>
+    </div>
+  </div>
+  <!-- End Testimonial Reviews -->
+  
+
+</div>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <!-- JS -->
+    <script src="analytic.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>
