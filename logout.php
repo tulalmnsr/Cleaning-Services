@@ -1,7 +1,14 @@
 <?php
+// Start the session
 session_start();
+
+// Unset all session variables
 session_unset();
+
+// Destroy the session
 session_destroy();
-header('Location: loginAdmin.php');
-exit;
+
+// Redirect to the home page or any other page after logout
+header("Location: homePage.php");
+exit();
 ?>

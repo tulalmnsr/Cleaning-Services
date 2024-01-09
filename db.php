@@ -2,11 +2,18 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "project1";
+$dbname = "project1";
 
-$your_connection = mysqli_connect($servername, $username, $password, $database);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if (!$your_connection) {
-    die("Connection failed: " . mysqli_connect_error());
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Select the database
+if (!$conn->select_db($dbname)) {
+    die("Database selection failed: " . $conn->error);
 }
 ?>
