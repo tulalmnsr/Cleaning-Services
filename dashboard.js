@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+
   $(document).ready(function () {
     // Fetch and display notifications when the page loads
     fetchNotifications();
@@ -292,4 +293,79 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   });
+
+=======
+document.addEventListener('DOMContentLoaded', function () {
+  var notificationCount = 0;
+
+  // Function to update the notification count
+  function updateNotificationCount() {
+    var notificationBadge = document.querySelector('.notification .num');
+    notificationBadge.textContent = notificationCount;
+
+    // Show/hide the badge based on the count
+    if (notificationCount > 0) {
+      notificationBadge.style.display = 'block';
+    } else {
+      notificationBadge.style.display = 'none';
+    }
+  }
+
+  // Function to add a new notification
+  function addNotification(message) {
+    var notificationMenu = document.getElementById('notificationMenu');
+
+    // Create a new notification element
+    var notificationElement = document.createElement('p');
+    notificationElement.textContent = message;
+
+    // Add the notification to the menu
+    notificationMenu.appendChild(notificationElement);
+
+    // Increment the notification count
+    notificationCount++;
+
+    // Update the notification count in the UI
+    updateNotificationCount();
+  }
+
+  // Function to toggle the notification menu visibility
+  function toggleNotificationMenu() {
+    var notificationMenu = document.getElementById('notificationMenu');
+    notificationMenu.style.display = notificationMenu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  // Clear all notifications
+  function clearNotifications() {
+    var notificationMenu = document.getElementById('notificationMenu');
+    notificationMenu.innerHTML = ''; // Clear the content
+    notificationCount = 0; // Reset the count
+    updateNotificationCount(); // Update the count in the UI
+  }
+
+  // Event listener for the notification icon click
+  document.querySelector('.notification i').addEventListener('click', function () {
+    toggleNotificationMenu();
+  });
+
+  // Simulate receiving a new notification
+  setTimeout(function () {
+    addNotification('New user registered.');
+  }, 2000);
+
+  // Simulate receiving another notification
+  setTimeout(function () {
+    addNotification('New appointment scheduled.');
+  }, 4000);
+
+  // Simulate receiving another notification
+  setTimeout(function () {
+    addNotification('New message received.');
+  }, 6000);
+
+  // Event listener for clearing notifications
+  document.getElementById('clearNotifications').addEventListener('click', function () {
+    clearNotifications();
+  });
+});
 

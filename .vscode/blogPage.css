@@ -1,0 +1,733 @@
+@import url("https://fonts.cdnfonts.com/css/neometric-2");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+
+body {
+  font-family: "Neometric Alt", sans-serif;
+  width: 100%;
+  margin: 0 auto;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+section {
+  padding: 25px 5%;
+  margin: 50px 0;
+}
+
+img {
+  width: 100%;
+}
+
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+.logo i{
+  color: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 15px;
+  gap: 1rem;
+}
+
+.navbar a {
+  margin-left: 15px;
+  color: #7f807f;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: all .4s ease;
+}
+
+.navbar a:hover, #menu-icon2:hover{
+  background: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+  color: #fff;
+}
+
+#menu-icon, #menu-icon2 {
+  cursor: pointer;
+  margin-left: 20px;
+  padding: 8px;
+  border-radius: 50%;
+}
+#menu-icon{
+  display: none;
+}
+
+
+
+/* banner styling */
+.banner {
+  margin-top: 80px;
+  background-color: rgb(255, 255, 255);
+  background: url(banner.jpg),
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.2) 85%
+    );
+  min-height: 550px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  object-fit: cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: start;
+  height: 100%;
+  padding: 80px 5%;
+}
+
+.banner-content {
+  width: 45%;
+}
+
+.banner-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--heading-color);
+}
+.banner-content p {
+  margin-bottom: 20px;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.button {
+  padding: 12px 22px;
+  background: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+  font: 1.125rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.34s ease-in;
+}
+
+.button:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+}
+
+/* featured post */
+.featured-post {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  width: 100%;
+  justify-content: space-between;
+}
+.featured-left {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.7rem;
+  align-items: start;
+}
+
+.featured-card {
+  width: 50%;
+}
+
+.featured-card img {
+  border-radius: 8px;
+  margin-bottom: 18px;
+  width: 100%;
+  height: 280px;
+}
+
+.featured-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  color: var(--heading-color);
+  padding-right: 10px;
+
+  /* to remain title in 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.featured-card p {
+  padding-right: 10px;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  line-height: 1.5;
+
+  /* to remain title in 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-outline {
+  padding: 12px 22px;
+  font: 1.125rem;
+  font-weight: 600;
+  background: transparent;
+  border-radius: 4px;
+  border: 2px solid  linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.34s ease-in;
+}
+
+.btn-outline:hover {
+  transform: translateY(-5px);
+  background-image: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+  color: #fff;
+}
+
+h3 {
+  font-size: 1.15rem;
+  color: var(--heading-color);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.featured-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.featured-right h3,
+.featured-right p {
+  width: 80%;
+}
+
+.readme-btn {
+  color: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  border-bottom: 2px solid var(--text-color);
+}
+
+
+.title {
+  color: var(--heading-color);
+  margin: 40px 0;
+}
+
+.blog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SmartUV {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.blog-card {
+  width: 25%;
+}
+
+.blog-card img {
+  border-radius: 8px;
+  height: 200px;
+  margin-bottom: 12px;
+}
+
+.newsletter{
+    min-height: 300px;
+    background: #b8f1f1;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsletter p{
+    width: 60%;
+    margin: 15px auto;
+    text-align: center;
+}
+
+.form input{
+    padding: 12px;
+    display: inline-flex;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+input[type="email"]{
+    width: 24%;
+    margin-right: 15px;
+}
+
+.form .btn{
+    padding: 12px 22px;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #054863;
+  color: #f2f4f7;
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.column {
+  flex: 1;
+  text-align: center;
+  margin: 10px;
+}
+
+.column h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.column p {
+  font-size: 14px;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: #6FBCFF;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+/* Navigation Links */
+.nav-links {
+  text-align: left;
+}
+
+.nav-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-bottom: 5px;
+}
+.nav-links a{
+  color: #6FBCFF;
+}
+/* Quick Links */
+.quick-links {
+  text-align: left;
+}
+
+.quick-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quick-links li {
+  margin-bottom: 5px;
+}
+.quick-links a{
+  color: #6FBCFF;
+}
+/* Contact Info */
+.contact-info {
+  text-align: left;
+}
+
+.contact-info i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.copyright-box {
+  background-color: #0B729B; /* New background color for the copyright box */
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+}
+
+.copyright-box p {
+  margin: 0;
+  font-size: 14px;
+}
+
+  
+header.sticky {
+    background: #ffffff;
+    padding: 12px 5%;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+@media screen and (max-width: 576px) {
+    .navbar {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        width: 300px;
+        height: 88vh;
+        background: #E1DEFD;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 100px 30px;
+        transition: all 0.45s ease;
+      }
+
+      .navbar a {
+        display: block;
+      }
+      .navbar.open {
+        right: 0;
+      }
+
+  #menu-icon {
+    display: initial;
+    font-size: 1.6rem;
+  }
+  #menu-icon2{
+    display: none;
+  }
+  /* banner style */
+  .banner-content {
+    width: 100%;
+  }
+
+  .banner-content h1 {
+    font-size: 2rem;
+  }
+
+  /* featured post */
+  .featured-post {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .featured-card {
+    width: 100%;
+  }
+  .featured-left {
+    flex-direction: column;
+  }
+
+  .featured-right h3,
+  .featured-right p {
+    width: 100%;
+  }
+
+  /* blogs */
+  .blog-header > div {
+    display: none;
+  }
+
+  .title{
+    margin-top: 0;
+  }
+
+  .SmartUV{
+    flex-direction: column;
+  }
+  .blog-card{
+    width: 100%;
+  }
+
+  /* newsletter */
+  .newsletter{
+    height: auto;
+    padding: 80px 0;
+  }
+  .newsletter p{
+    width: 100%;
+  }
+  input[type="email"]{
+    width: 80%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+    /* footer */
+    .footer-container{
+        flex-direction: column;
+      }
+      .web-pages{
+        flex-wrap: wrap;
+        margin-top: 48px;
+      }
+}
+
+
+@media only screen and (min-width: 577px) and (max-width: 788px){
+  .navbar {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    width: 300px;
+    height: 88vh;
+    background: #E1DEFD;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 30px;
+    transition: all 0.45s ease;
+  }
+
+  .navbar a {
+    display: block;
+  }
+  .navbar.open {
+    right: 0;
+  }
+
+#menu-icon {
+display: initial;
+font-size: 1.6rem;
+}
+#menu-icon2{
+display: none;
+}
+.banner-content{
+  width: 100%;
+}
+  .featured-post{
+    grid-template-columns: 1fr;
+  }
+  .footer-container{
+    flex-direction: column;
+  }
+  .SmartUV{
+    flex-wrap: wrap;
+  }
+  .blog-card{
+    width: 45%;
+  }
+
+  .web-pages{
+    margin-top: 48px;
+  }
+
+}
+/* Navbar */
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar One */
+.navbar-one {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #11bafc, #054863);
+  color: white;
+  height: 40px;
+  padding: 0 50px;
+  cursor: pointer;
+  position: fixed; /* Add this to fix the position */
+  top: 0; /* Add this to fix the position */
+  left: 0; /* Add this to fix the position */
+  right: 0; /* Add this to fix the position */
+  z-index: 1001; /* Make sure it has a higher z-index than navbar-two */
+}
+
+
+.navbar-one .left > div + div {
+  margin-left: 40px;
+}
+
+.navbar-one .right > div {
+  margin-left: 40px;
+}
+
+.navbar-one .left > div:hover,
+.navbar-one .right > div:hover {
+  color: black;
+  transition: all 0.5s;
+}
+
+.navbar-one span {
+  margin-left: 5px;
+}
+
+/* Navbar Two */
+.navbar-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 60px;
+  position: fixed;
+  top: 40px; /* Adjust this to match the height of navbar-one */
+  left: 0;
+  right: 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0 50px;
+  z-index: 1000; /* Make sure it has a lower z-index than navbar-one */
+}
+
+.navbar-two .logo {
+  font-size: 24px;
+  cursor: pointer;
+  color: #054863;
+}
+
+.navbar-two .menu-icon {
+  display: none;
+  font-size: 30px;
+  color: #054863;
+  cursor: pointer;
+}
+
+.navbar-two ul {
+  display: flex;
+  list-style: none;
+}
+
+.navbar-two ul li {
+  color: #054863;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  transition: background 0.5s;
+}
+
+.navbar-two ul li a {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 16px;
+  margin-left: 20px;
+  color: #054863;
+  font-weight: 400;
+}
+
+.navbar-two a.active,
+.navbar-two a:hover {
+  background: #054863;
+  color: #fcfdfd;
+  transition: background 0.5s;
+}
+
+.navbar-two .item:hover {
+  background: #054863;
+  padding: 5px 15px;
+  border-radius: 30px;
+  color: #fcfdfd;
+  transition: background 0.5s;
+}
+
+.navbar-two .button {
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(to right, #79fdc6, #68DBAB);
+  padding: 8px 20px;
+  border: 1px solid #68DBAB;
+  border-radius: 100px;
+  margin-left: 2px;
+  transition: background 0.5s;
+}
+
+/* Responsive Styles */
+@media (max-width: 952px) {
+  .navbar-two .logo {
+      font-size: 30px;
+      padding-left: 50px;
+  }
+
+  .navbar-two ul li a {
+      font-size: 16px;
+  }
+}
+
+@media (max-width: 858px) {
+  .navbar-two .menu-icon {
+      display: block;
+      order: 1;
+  }
+
+  .navbar-two ul {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background-color: #2c3e50;
+      text-align: center;
+      flex-direction: column;
+      z-index: 1001;
+      transition: opacity 0.5s;
+  }
+
+  .navbar-two ul.show {
+      display: flex;
+      opacity: 1;
+  }
+
+  .navbar-two ul li {
+      display: block;
+      margin: 20px 0;
+      line-height: 30px;
+  }
+
+  .navbar-two ul li a {
+      font-size: 20px;
+      color: #9cdcf5;
+      transition: background 0.5s;
+  }
+
+  .navbar-two .button,
+  .navbar-two .item {
+      margin: 10px 0;
+      transition: background 0.5s;
+  }
+
+  .navbar-two a:hover,
+  .navbar-two a.active {
+      background: none;
+      color: #9cdcf5;
+  }
+}

@@ -1,0 +1,45 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-container {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.team-title {
+    color: #054863;
+    text-align: center;
+}
+
+.team-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.team-card {
+    background-color: #A6FFDA;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    margin: 20px;
+}
+
+.team-card img {
+    width: 200px;
+    height: 150px;;
+    object-fit: cover;
+}
+
+h2, p {
+    color: #054863;
+}
