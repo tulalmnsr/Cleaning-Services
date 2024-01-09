@@ -89,4 +89,43 @@ function toggleMenu() {
           li.classList.remove('active');
           document.querySelector('nav ul li a[href*=' + current + ']').classList.add('active');
       });
+
   });
+  $(document).ready(function() {
+    // Load initial chat messages
+    fetchChatMessages();
+
+    // Submitting the message form
+    $("#message-form").submit(function(e) {
+        e.preventDefault();
+        sendMessage($("#message").val());
+    });
+
+    // Function to fetch chat messages
+    function fetchChatMessages() {
+        $.ajax({
+            url: "get_messages.php",
+            type: "GET",
+            success: function(data) {
+                $("#chat-box").html(data);
+            }
+        });
+    }
+
+    // Function to send a message
+    function sendMessage(message) {
+        $.ajax({
+            url: "send_message.php",
+            type: "POST",
+            data: { message: message },
+            success: function() {
+                $("#message").val(""); // Clear the input field
+                fetchChatMessages(); // Refresh chat messages
+            }
+        });
+    }
+
+    // Refresh chat messages every 3 seconds (adjust as needed)
+    setInterval(fetchChatMessages, 3000);
+});
+

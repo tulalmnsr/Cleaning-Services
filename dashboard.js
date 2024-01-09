@@ -260,6 +260,41 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
+
+
+  $(document).ready(function () {
+    // Fetch and display notifications when the page loads
+    fetchNotifications();
+
+    $(".notification").click(function () {
+      $("#notificationMenu").toggleClass("show");
+      // Fetch and display notifications when the bell icon is clicked
+      fetchNotifications();
+    });
+
+    // Close notification menu if clicked outside
+    $(document).on("click", function (event) {
+      if (!$(event.target).closest(".notification").length) {
+        $("#notificationMenu").removeClass("show");
+      }
+    });
+
+    // Function to fetch notifications from the server
+    function fetchNotifications() {
+      $.ajax({
+        url: "get_notifications.php",
+        method: "GET",
+        success: function (data) {
+          $("#notificationMenu").html(data); // Update the notification menu with received data
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    }
+  });
+
+=======
 document.addEventListener('DOMContentLoaded', function () {
   var notificationCount = 0;
 
@@ -333,3 +368,4 @@ document.addEventListener('DOMContentLoaded', function () {
     clearNotifications();
   });
 });
+

@@ -77,10 +77,40 @@ button:hover {
         font-size: 28px;
     }
 }
+
+
+
 .image-upload {
     text-align: center;
     margin-bottom: 20px;
     position: relative;
+
+    padding: 30px;
+    margin: 50px;
+}
+
+.profile-image-container {
+    position: relative;
+    width: 120px; /* Adjust the size of the circular container */
+    height: 120px; /* Adjust the size of the circular container */
+    border-radius: 25%;
+    overflow: hidden;
+    border: 2px solid #fff; /* Border color */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    margin: 30px auto;
+}
+
+#previewImage {
+    width: 100%; /* Ensure the image takes up 100% of the circular container */
+    height: 100%; /* Ensure the image takes up 100% of the circular container */
+    object-fit: cover;
+    max-width: 100%; /* Limit the image's maximum width */
+    max-height: 100%; /* Limit the image's maximum height */
+}
+
+/* ... (your existing styles) ... */
+
+=======
 }
 
 .image-upload input {
@@ -105,6 +135,7 @@ button:hover {
     bottom: 0; /* Position it at the bottom */
     right: 0; /* Position it at the right */
 }
+
 
 .social-links {
     display: flex;
@@ -189,4 +220,6 @@ button:hover {
 .light-mode {
     background-color: #fff;
     color: #1a2236;
+
 }
+
