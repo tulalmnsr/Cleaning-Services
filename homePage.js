@@ -89,6 +89,7 @@ function toggleMenu() {
           li.classList.remove('active');
           document.querySelector('nav ul li a[href*=' + current + ']').classList.add('active');
       });
+
   });
   $(document).ready(function() {
     // Load initial chat messages
@@ -127,3 +128,4 @@ function toggleMenu() {
     // Refresh chat messages every 3 seconds (adjust as needed)
     setInterval(fetchChatMessages, 3000);
 });
+

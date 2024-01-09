@@ -76,6 +76,7 @@ body {
 }
 
 /* End Contact Section  */
+
 html {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 62.5%;
@@ -928,6 +929,9 @@ input[type="email"]{
     box-shadow: 0 0.5rem 0.5rem -0.4rem rgba(0 0 0 / .5);
     transform: scale(1.1);
 }
+.contact .title{
+    color: #000;
+}
 
 /* End Pricing Section  */
   /* Start Review Section  */
@@ -1399,6 +1403,10 @@ input[type="email"]{
    
   }
 
+  .contact .h2{
+    color:#000;
+    background-color: #000000;
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -1757,6 +1765,7 @@ input[type="email"]{
   }
   .blog-section .button{
     margin-left: 45%;
+
   }
          /* Style for the options container */
          .options-container {
@@ -1842,3 +1851,4 @@ input[type="email"]{
 .dropdown:hover .button {
     background-color: #3e8e41;
 }
+

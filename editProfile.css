@@ -77,12 +77,14 @@ button:hover {
         font-size: 28px;
     }
 }
-/* ... (your existing styles) ... */
+
+
 
 .image-upload {
     text-align: center;
     margin-bottom: 20px;
     position: relative;
+
     padding: 30px;
     margin: 50px;
 }
@@ -107,6 +109,32 @@ button:hover {
 }
 
 /* ... (your existing styles) ... */
+
+=======
+}
+
+.image-upload input {
+    display: none;
+}
+
+.image-upload img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-bottom: 20px; /* Margin below the image */
+}
+
+.image-upload label {
+    cursor: pointer;
+    background-color: #0d1425;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0; /* Position it at the bottom */
+    right: 0; /* Position it at the right */
+}
 
 
 .social-links {
@@ -192,4 +220,6 @@ button:hover {
 .light-mode {
     background-color: #fff;
     color: #1a2236;
+
 }
+
